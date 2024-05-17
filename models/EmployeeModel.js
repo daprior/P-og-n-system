@@ -56,23 +56,11 @@ const EmployeeSchema = new mongoose.Schema(
       required: false,
     },
     checkboxes1: {
-      type: [
-        {
-          value: String,
-          label: String,
-          checked: Boolean,
-        },
-      ],
+      type: [String], // Since position is a multiselect field
       required: false,
     },
     checkboxes2: {
-      type: [
-        {
-          value: String,
-          label: String,
-          checked: Boolean,
-        },
-      ],
+      type: [String], // Since position is a multiselect field
       required: false,
     },
     message: {

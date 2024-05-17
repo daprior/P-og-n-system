@@ -29,52 +29,30 @@ export default function OnboardIndex() {
       department: [],
       message: "",
       position: [],
-      checkboxes1: [
-        { value: "fiat", label: "Fiat", checked: false },
-        { value: "ford", label: "Ford", checked: false },
-        { value: "kia", label: "Kia", checked: false },
-        { value: "mazda", label: "Mazda", checked: false },
-        { value: "renault", label: "Renault", checked: false },
-        { value: "volvo", label: "Volvo", checked: false },
-        { value: "dracar", label: "Dracar", checked: false },
-        { value: "docuBizz", label: "DocuBizz", checked: false },
-        { value: "email", label: "E-mail", checked: false },
-        { value: "bilinfo", label: "Bilinfo", checked: false },
-        { value: "adt", label: "ADT", checked: false },
-        { value: "vaerkstedplanne", label: "Værkstedplanne", checked: false },
-      ],
-      checkboxes2: [
-        { value: "paidphone", label: "Firmabetalt tlf ", checked: false },
-        { value: "visitkort", label: "Visitkort", checked: false },
-      ],
+      checkboxes1: [],
+      checkboxes2: [],
     },
   });
 
   const test = async (values) => {
     console.log("Form values:", form.values);
-  
+
     try {
-      const response = await axios.post('/api/createemployee', values); // Sender formdata til din API-rute
-      console.log('Medarbejder oprettet:', response.data);
+      const response = await axios.post("/api/createemployee", values); // Sender formdata til din API-rute
+      console.log("Medarbejder oprettet:", response.data);
       notifications.show({
         title: "Oprettet",
         color: "green",
         message: "Medarbejderen er nu oprettet.",
       });
     } catch (error) {
-      console.error('Fejl ved oprettelse af medarbejder:', error);
+      console.error("Fejl ved oprettelse af medarbejder:", error);
       notifications.show({
         title: "Fejl",
         color: "red",
         message: "Der opstod en fejl ved oprettelse af medarbejderen.",
       });
     }
-  };
-
-  const handleCheckboxChange = (index, group) => {
-    const updatedCheckboxes = [...form.values[`checkboxes${group}`]];
-    updatedCheckboxes[index].checked = !updatedCheckboxes[index].checked;
-    form.setFieldValue(`checkboxes${group}`, updatedCheckboxes);
   };
 
   return (
@@ -91,7 +69,7 @@ export default function OnboardIndex() {
           size="xs"
           className="mb-4"
         />
-        <Divider className="mb-4"/>
+        <Divider className="mb-4" />
         <div className="grid gap-4 md:grid-cols-2">
           <TextInput
             label="Navn"
@@ -168,34 +146,35 @@ export default function OnboardIndex() {
           />
         </div>
         <div className="mt-4">
-          <Checkbox.Group size="xs" label="Overordnet ">
-            <Group mt="xs">
-              {form.values.checkboxes1.map((checkbox, index) => (
-                <Checkbox
-                  key={index}
-                  value={checkbox.value}
-                  label={checkbox.label}
-                  onChange={() => handleCheckboxChange(index, 1)}
-                  checked={checkbox.checked}
-                />
-              ))}
-            </Group>
-          </Checkbox.Group>
+          <MultiSelect
+            label="Overordnet"
+            placeholder="Vælg"
+            data={[
+              "Ford",
+              "Fiat",
+              "Kia",
+              "Mazda",
+              "Renault",
+              "Volvo",
+              "Dracar",
+              "Docubizz",
+              "E-mail",
+              "Bilinfo",
+              "ADT",
+              "Værkstedsplanne",
+            ]}
+            {...form.getInputProps("checkboxes1")}
+            size="xs"
+          />
         </div>
         <div className="mt-4">
-          <Checkbox.Group size="xs" label="IT ">
-            <Group mt="xs">
-              {form.values.checkboxes2.map((checkbox, index) => (
-                <Checkbox
-                  key={index}
-                  value={checkbox.value}
-                  label={checkbox.label}
-                  onChange={() => handleCheckboxChange(index, 2)}
-                  checked={checkbox.checked}
-                />
-              ))}
-            </Group>
-          </Checkbox.Group>
+          <MultiSelect
+            label="IT"
+            placeholder="Vælg"
+            data={["Betalt tlf", "Visitkort"]}
+            {...form.getInputProps("checkboxes2")}
+            size="xs"
+          />
         </div>
         <Textarea
           label="Note"

@@ -31,22 +31,14 @@ export default function EmployeeEditModal({
       department: [],
       message: "",
       position: [],
-      checkboxes1: [
-        { value: "fiat", label: "Fiat", checked: false },
-        { value: "ford", label: "Ford", checked: false },
-        // ... other options
-      ],
-      checkboxes2: [
-        { value: "paidphone", label: "Firmabetalt tlf", checked: false },
-        { value: "visitkort", label: "Visitkort", checked: false },
-      ],
+      checkboxes1: [],
+      checkboxes2: [],
     },
   });
 
   useEffect(() => {
-    if (selectedEmployee && !form.values.udfyldtaf) {
+    if (selectedEmployee) {
       form.setValues({
-        ...form.values,
         udfyldtaf: selectedEmployee.udfyldtaf || "",
         email: selectedEmployee.email || "",
         name: selectedEmployee.name || "",
@@ -59,23 +51,11 @@ export default function EmployeeEditModal({
         department: selectedEmployee.department || [],
         message: selectedEmployee.message || "",
         position: selectedEmployee.position || [],
-        checkboxes1: form.values.checkboxes1.map((checkbox) => ({
-          ...checkbox,
-          checked:
-            selectedEmployee.checkboxes1?.find(
-              (item) => item.value === checkbox.value
-            )?.checked || false,
-        })),
-        checkboxes2: form.values.checkboxes2.map((checkbox) => ({
-          ...checkbox,
-          checked:
-            selectedEmployee.checkboxes2?.find(
-              (item) => item.value === checkbox.value
-            )?.checked || false,
-        })),
+        checkboxes1: selectedEmployee.checkboxes1 || [],
+        checkboxes2: selectedEmployee.checkboxes2 || [],
       });
     }
-  }, [selectedEmployee, form]);
+  }, [selectedEmployee, form.setValues]);
 
   const handleUpdate = async (values) => {
     try {
@@ -96,19 +76,6 @@ export default function EmployeeEditModal({
     }
   };
 
-  const handleCheckboxChange = (index, group) => {
-    const updatedCheckboxes = [...form.values[`checkboxes${group}`]];
-    updatedCheckboxes[index] = {
-      ...updatedCheckboxes[index],
-      checked: !updatedCheckboxes[index].checked,
-    };
-    form.setValues((prevState) => ({
-      ...prevState,
-      [`checkboxes${group}`]: updatedCheckboxes,
-    }));
-  };
-
-  console.log(selectedEmployee, "HDAHSDH");
   return (
     <Modal
       key={selectedEmployee ? selectedEmployee._id : "new"}
@@ -191,32 +158,33 @@ export default function EmployeeEditModal({
           {...form.getInputProps("department")}
           size="xs"
         />
-        <Checkbox.Group size="xs" label="Overordnet ">
-          <Group mt="xs">
-            {form.values.checkboxes1.map((checkbox, index) => (
-              <Checkbox
-                key={index}
-                value={checkbox.value}
-                label={checkbox.label}
-                onChange={() => handleCheckboxChange(index, 1)}
-                checked={checkbox.checked}
-              />
-            ))}
-          </Group>
-        </Checkbox.Group>
-        <Checkbox.Group size="xs" label="IT ">
-          <Group mt="xs">
-            {form.values.checkboxes2.map((checkbox, index) => (
-              <Checkbox
-                key={index}
-                value={checkbox.value}
-                label={checkbox.label}
-                onChange={() => handleCheckboxChange(index, 2)}
-                checked={checkbox.checked}
-              />
-            ))}
-          </Group>
-        </Checkbox.Group>
+        <MultiSelect
+          label="Overordnet"
+          placeholder="Vælg"
+          data={[
+            "Ford",
+            "Fiat",
+            "Kia",
+            "Mazda",
+            "Renault",
+            "Volvo",
+            "Dracar",
+            "Docubizz",
+            "E-mail",
+            "Bilinfo",
+            "ADT",
+            "Værkstedsplanne",
+          ]}
+          {...form.getInputProps("checkboxes1")}
+          size="xs"
+        />
+        <MultiSelect
+          label="IT"
+          placeholder="Vælg"
+          data={["Betalt tlf", "Visitkort"]}
+          {...form.getInputProps("checkboxes2")}
+          size="xs"
+        />
         <Textarea
           label="Note"
           size="xs"

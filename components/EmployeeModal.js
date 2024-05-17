@@ -61,27 +61,11 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Overordnet:</span>{" "}
-          {selectedEmployee &&
-            selectedEmployee.checkboxes1
-              .filter((checkbox) => checkbox.checked) // Filter out only the checked checkboxes
-              .map((checkbox, index, array) => (
-                <span key={index}>
-                  {checkbox.label}
-                  {index !== array.length - 1 ? ", " : ""}
-                </span>
-              ))}
+          {selectedEmployee && selectedEmployee.checkboxes1}
         </p>
         <p>
           <span className="font-bold">IT:</span>{" "}
-          {selectedEmployee &&
-            selectedEmployee.checkboxes2
-              .filter((checkbox) => checkbox.checked) // Filter out only the checked checkboxes
-              .map((checkbox, index, array) => (
-                <span key={index}>
-                  {checkbox.label}
-                  {index !== array.length - 1 ? ", " : ""}
-                </span>
-              ))}
+          {selectedEmployee && selectedEmployee.checkboxes2}
         </p>
         <p>
           <span className="font-bold">Oprettet:</span>{" "}

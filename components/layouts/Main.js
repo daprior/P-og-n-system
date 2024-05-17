@@ -16,7 +16,13 @@ import { RiArchive2Line, RiDashboard2Line } from "react-icons/ri";
 import { Button, Divider } from "@mantine/core";
 import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
-import { IoChatbox, IoChatboxOutline, IoDocumentAttachSharp, IoDocumentOutline, IoPhonePortraitOutline } from "react-icons/io5";
+import {
+  IoChatbox,
+  IoChatboxOutline,
+  IoDocumentAttachSharp,
+  IoDocumentOutline,
+  IoPhonePortraitOutline,
+} from "react-icons/io5";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -33,7 +39,11 @@ export default function Main({ children, style = "" }) {
     { name: "Dashboard", href: `/user/dashboard`, icon: RiDashboard2Line },
     { name: "Onboard", href: `/user/onboarding`, icon: MagnifyingGlassIcon },
     { name: "Medarbejdere", href: `/user/medarbejdere`, icon: RiArchive2Line },
-    { name: "Udstyrsliste", href: `/user/equipment`, icon: IoPhonePortraitOutline },
+    {
+      name: "Udstyrsliste",
+      href: `/user/equipment`,
+      icon: IoPhonePortraitOutline,
+    },
     { name: "Tjekliste", href: `/user/checklist`, icon: IoDocumentOutline },
     { name: "Chat", href: `/user/chat`, icon: IoChatboxOutline },
   ];
@@ -41,12 +51,12 @@ export default function Main({ children, style = "" }) {
   const teams = [
     {
       id: 1,
-      name: "Whatever",
+      name: "#",
       href: "#",
       initial: "W",
     },
   ];
-  const userNavigation = [{ name: "Profil", href: "#" }];
+  const userNavigation = [{ name: "Forside", href: "/" }];
 
   return (
     <>
@@ -117,15 +127,6 @@ export default function Main({ children, style = "" }) {
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>
-                          <Link href={`/user/create`}>
-                            <Button
-                              className="w-full text-white bg-[#1F2937] border-[#1F2937] hover:bg-black mb-5"
-                              variant="outline"
-                              color="dark"
-                            >
-                              <p className="font-bold">Opret ny</p>
-                            </Button>
-                          </Link>
                           <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
@@ -152,9 +153,9 @@ export default function Main({ children, style = "" }) {
                           </ul>
                         </li>
                         <li>
-                          <div className="text-xs font-semibold leading-6 text-black ">
+                          {/* <div className="text-xs font-semibold leading-6 text-black ">
                             Konfigurationer
-                          </div>
+                          </div> */}
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>
@@ -181,16 +182,6 @@ export default function Main({ children, style = "" }) {
                             href={`#`}
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                           >
-                            <Cog6ToothIcon
-                              className="h-6 w-6 shrink-0"
-                              aria-hidden="true"
-                            />
-                            Indstillinger
-                          </Link>
-                          <Link
-                            href={`#`}
-                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                          >
                             <DocumentTextIcon
                               className="h-6 w-6 shrink-0"
                               aria-hidden="true"
@@ -212,13 +203,13 @@ export default function Main({ children, style = "" }) {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col  overflow-y-auto px-4 pb-4 bg-[#0E0F10]">
             <div className="flex h-16 shrink-0 items-center ">
-              <Link href="/">
+              {/* <Link href="/">
                 <img
                   className="h-6 ml-2 w-auto"
                   src="/logo.png"
                   alt="Your Company"
                 />
-              </Link>
+              </Link> */}
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-2">
@@ -336,9 +327,7 @@ export default function Main({ children, style = "" }) {
 
                     <span className="hidden lg:flex lg:items-center">
                       <span className="leading-6" aria-hidden="true">
-                        <div className="text-sm font-semibold">
-                          Brugernavn
-                        </div>
+                        <div className="text-sm font-semibold">Testbruger</div>
                       </span>
                     </span>
                     <ChevronDownIcon

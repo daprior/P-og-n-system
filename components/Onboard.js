@@ -4,13 +4,13 @@ import {
   Textarea,
   Button,
   MultiSelect,
-  Checkbox,
-  Group,
   Select,
   Divider,
+  Modal,
+  Group,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
 
@@ -35,25 +35,32 @@ export default function OnboardIndex() {
     },
   });
 
-  const test = async (values) => {
-    console.log("Form values:", form.values);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
-    try {
-      const response = await axios.post("/api/createemployee", values); // Sender formdata til din API-rute
-      console.log("Medarbejder oprettet:", response.data);
-      notifications.show({
-        title: "Oprettet",
-        color: "green",
-        message: "Medarbejderen er nu oprettet.",
-      });
-    } catch (error) {
-      console.error("Fejl ved oprettelse af medarbejder:", error);
-      notifications.show({
-        title: "Fejl",
-        color: "red",
-        message: "Der opstod en fejl ved oprettelse af medarbejderen.",
-      });
+  const handleShowConfirmation = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmation = async (confirmed) => {
+    if (confirmed) {
+      try {
+        const response = await axios.post("/api/createemployee", form.values);
+        console.log("Medarbejder oprettet:", response.data);
+        notifications.show({
+          title: "Oprettet",
+          color: "green",
+          message: "Medarbejderen er nu oprettet.",
+        });
+      } catch (error) {
+        console.error("Fejl ved oprettelse af medarbejder:", error);
+        notifications.show({
+          title: "Fejl",
+          color: "red",
+          message: "Der opstod en fejl ved oprettelse af medarbejderen.",
+        });
+      }
     }
+    setShowConfirmation(false);
   };
 
   return (
@@ -61,7 +68,7 @@ export default function OnboardIndex() {
       <div className="font-bold mb-4">
         <h3>Onboarding</h3>
       </div>
-      <form onSubmit={form.onSubmit((values) => test(values))}>
+      <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
         <Select
           label="Skema udfyldt af"
           placeholder="Navn"
@@ -178,6 +185,22 @@ export default function OnboardIndex() {
           Opret medarbejder
         </Button>
       </form>
+
+      <Modal
+        opened={showConfirmation}
+        onClose={() => handleConfirmation(false)}
+        title="Er du sikker på, at du vil oprette medarbejderen?"
+        size="sm"
+      >
+        <Group position="center" mt="md">
+          <Button className="bg-black" color="green" onClick={() => handleConfirmation(true)}>
+            Ja, opret medarbejder
+          </Button>
+          <Button className="bg-black" color="red" onClick={() => handleConfirmation(false)}>
+            Nej
+          </Button>
+        </Group>
+      </Modal>
     </div>
   );
 }

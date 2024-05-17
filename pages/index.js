@@ -18,7 +18,7 @@ export default function Index() {
         {/* Button in the right corner */}
         <div className="absolute top-0 right-0 m-4">
           <Link href="/login">
-            <Button size="md" className="bg-black">Login</Button>
+            <Button size="md" className="bg-black">Gå til Login</Button>
           </Link>
         </div>
       </div>

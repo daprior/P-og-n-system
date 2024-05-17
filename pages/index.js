@@ -1,7 +1,30 @@
-import { Button, PasswordInput, TextInput } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
+import { useState } from 'react';
+import { useRouter } from 'next/router'; // Using Next.js router
+import { Button, PasswordInput, TextInput, Notification } from "@mantine/core";
 
-export default function Example() {
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showError, setShowError] = useState(false);
+  const router = useRouter();
+
+  // Define your correct email and password combination
+  const correctEmail = 'test@test.dk';
+  const correctPassword = '1234';
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    // Check if the input matches the correct email and password
+    if (email === correctEmail && password === correctPassword) {
+      // Redirect to the next page
+      router.push('/user/dashboard');
+    } else {
+      // Show error notification
+      setShowError(true);
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -14,7 +37,7 @@ export default function Example() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
@@ -23,7 +46,7 @@ export default function Example() {
                 Email address
               </label>
               <div className="mt-2">
-                <TextInput />
+                <TextInput value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
             </div>
 
@@ -35,14 +58,9 @@ export default function Example() {
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div> */}
               </div>
               <div className="mt-2">
-                <PasswordInput />
+                <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
             </div>
 
@@ -55,13 +73,19 @@ export default function Example() {
               </button>
             </div>
           </form>
-          {/* 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
-          </p> */}
+
+          {/* Notification for login error */}
+          {showError && (
+            <Notification
+              title="Forkert bruger eller kodeord"
+              color="red"
+              onClose={() => setShowError(false)}
+              shadow="md"
+              className="mt-4"
+            >
+              Forkert bruger eller kodeord
+            </Notification>
+          )}
         </div>
       </div>
     </>

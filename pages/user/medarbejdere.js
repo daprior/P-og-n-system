@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import axios from "axios";
-import { TextInput, Table } from "@mantine/core";
+import { TextInput, Table, Loader } from "@mantine/core"; // Assuming Loader component exists
 import { IoPencilOutline, IoSearchOutline, IoTrashBinOutline } from "react-icons/io5";
 import { useDisclosure } from "@mantine/hooks";
 import EmployeeModal from "/components/EmployeeModal";
@@ -11,14 +11,11 @@ import Main from "components/layouts/Main";
 const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 export default function DashboardIndex() {
-  const { data: employees, error, mutate } = useSWR('/api/getemployees', fetcher);
+  const { data: employees, error, isValidating, mutate } = useSWR('/api/getemployees', fetcher);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isEmployeeModalOpen, { open: openEmployeeModal, close: closeEmployeeModal }] = useDisclosure(false);
   const [isEmployeeEditModalOpen, { open: openEmployeeEditModal, close: closeEmployeeEditModal }] = useDisclosure(false);
-
-  if (error) return <div>Failed to load</div>;
-  if (!employees) return <div>Loading...</div>;
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -34,7 +31,11 @@ export default function DashboardIndex() {
     openEmployeeEditModal();
   };
 
-  const rows = employees
+  const rows = isValidating
+    ? <Table.Tr><Table.Td colSpan="6" className="text-center"><Loader /></Table.Td></Table.Tr>
+    : error
+    ? <Table.Tr><Table.Td colSpan="6" className="text-center">Failed to load</Table.Td></Table.Tr>
+    : employees
     .filter((employee) =>
       employee.name.toLowerCase().includes(searchTerm.toLowerCase())
     )

@@ -63,6 +63,11 @@ const EmployeeSchema = new mongoose.Schema(
       type: [String], // Since position is a multiselect field
       required: false,
     },
+    newPhoneType: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     message: {
       type: String,
       required: false,

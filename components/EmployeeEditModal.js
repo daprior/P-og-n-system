@@ -33,6 +33,7 @@ export default function EmployeeEditModal({
       position: [],
       checkboxes1: [],
       checkboxes2: [],
+      newPhoneType: "",
     },
   });
 
@@ -46,6 +47,7 @@ export default function EmployeeEditModal({
         phone: selectedEmployee.phone || "",
         username: selectedEmployee.username || "",
         lastName: selectedEmployee.lastName || "",
+        newPhoneType: selectedEmployee.newPhoneType || "",
         newPhoneNumber: selectedEmployee.newPhoneNumber || "",
         jobTitle: selectedEmployee.jobTitle || "",
         department: selectedEmployee.department || [],
@@ -92,25 +94,13 @@ export default function EmployeeEditModal({
           size="xs"
         />
         <TextInput
-          label="Firma"
-          placeholder="Medarbejder firma"
-          {...form.getInputProps("company")}
-          size="xs"
-        />
-        <TextInput
           label="Telefonnummer"
           placeholder="Medarbejder telefonnummer"
           {...form.getInputProps("phone")}
           size="xs"
         />
-        <TextInput
-          label="Email"
-          placeholder="Medarbejder email"
-          {...form.getInputProps("email")}
-          size="xs"
-        />
         <MultiSelect
-          label="Stilling"
+          label="Stillingsbetegnelse"
           placeholder="Vælg"
           data={["Salg", "Lager", "Værksted", "Administration"]}
           {...form.getInputProps("position")}
@@ -122,18 +112,7 @@ export default function EmployeeEditModal({
           {...form.getInputProps("username")}
           size="xs"
         />
-        <TextInput
-          label="Efternavn"
-          placeholder="Medarbejder efternavn"
-          {...form.getInputProps("lastName")}
-          size="xs"
-        />
-        <TextInput
-          label="Nyt Telefonnummer"
-          placeholder="Medarbejder nye telefonnummer"
-          {...form.getInputProps("newPhoneNumber")}
-          size="xs"
-        />
+
         <TextInput
           label="Jobtitel"
           placeholder="Medarbejder jobtitel"
@@ -174,6 +153,10 @@ export default function EmployeeEditModal({
             "Bilinfo",
             "ADT",
             "Værkstedsplanne",
+            "Nissan",
+            "JAC",
+            "Isuzu",
+            "Maxus",
           ]}
           {...form.getInputProps("checkboxes1")}
           size="xs"
@@ -181,8 +164,14 @@ export default function EmployeeEditModal({
         <MultiSelect
           label="IT"
           placeholder="Vælg"
-          data={["Betalt tlf", "Visitkort"]}
+          data={["Firma tlf", "Visitkort"]}
           {...form.getInputProps("checkboxes2")}
+          size="xs"
+        />
+        <TextInput
+          label="Aftale om bestemt telefon"
+          placeholder="Model"
+          {...form.getInputProps("newPhoneType")}
           size="xs"
         />
         <Textarea

@@ -1,91 +1,25 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router'; // Using Next.js router
-import { Button, PasswordInput, TextInput, Notification } from "@mantine/core";
+import { Button } from "@mantine/core";
+import Link from "next/link";
+import Onboard from "components/Onboard";
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showError, setShowError] = useState(false);
-  const router = useRouter();
-
-  // Define your correct email and password combination
-  const correctEmail = 'test@test.dk';
-  const correctPassword = '1234';
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    
-    // Check if the input matches the correct email and password
-    if (email === correctEmail && password === correctPassword) {
-      // Redirect to the next page
-      router.push('/user/dashboard');
-    } else {
-      // Show error notification
-      setShowError(true);
-    }
-  };
-
+export default function Index() {
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <img src="/logo.png" className="h-16 w-48"></img>
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-[#EFF5F9]">
+        <img src="/logo.png" className="h-16 w-48"></img>
 
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Login
-          </h2>
+        <div className="pt-10 pr-20 pl-20 pb-20  shadow-xl mt-10 rounded-lg bg-white">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Opret medarbejder
+        </h2>
+          <Onboard />
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleLogin}>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <TextInput value={email} onChange={(e) => setEmail(e.target.value)} />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Login
-              </button>
-            </div>
-          </form>
-
-          {/* Notification for login error */}
-          {showError && (
-            <Notification
-              title="Forkert bruger eller kodeord"
-              color="red"
-              onClose={() => setShowError(false)}
-              shadow="md"
-              className="mt-4"
-            >
-              Forkert bruger eller kodeord
-            </Notification>
-          )}
+        {/* Button in the right corner */}
+        <div className="absolute top-0 right-0 m-4">
+          <Link href="/login">
+            <Button size="md" className="bg-black">Login</Button>
+          </Link>
         </div>
       </div>
     </>

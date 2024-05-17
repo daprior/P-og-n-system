@@ -16,7 +16,7 @@ import { RiArchive2Line, RiDashboard2Line } from "react-icons/ri";
 import { Button, Divider } from "@mantine/core";
 import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
-import { IoDocumentAttachSharp, IoDocumentOutline, IoPhonePortraitOutline } from "react-icons/io5";
+import { IoChatbox, IoChatboxOutline, IoDocumentAttachSharp, IoDocumentOutline, IoPhonePortraitOutline } from "react-icons/io5";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -35,6 +35,7 @@ export default function Main({ children, style = "" }) {
     { name: "Medarbejdere", href: `/user/medarbejdere`, icon: RiArchive2Line },
     { name: "Udstyrsliste", href: `/user/equipment`, icon: IoPhonePortraitOutline },
     { name: "Tjekliste", href: `/user/checklist`, icon: IoDocumentOutline },
+    { name: "Chat", href: `/user/chat`, icon: IoChatboxOutline },
   ];
 
   const teams = [

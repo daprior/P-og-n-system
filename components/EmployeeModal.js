@@ -2,6 +2,12 @@ import React from "react";
 import { Modal } from "@mantine/core";
 
 export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
+  // Funktion til at formatere arrays med mellemrum
+  const formatArray = (arr) => {
+    if (!arr || !Array.isArray(arr)) return ""; // Håndterer tilfælde, hvor arr ikke er defineret eller ikke er et array
+    return arr.join(", "); // Konverterer array til en streng med elementer adskilt af ", "
+  };
+
   return (
     <Modal
       opened={opened}
@@ -53,19 +59,19 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Afdelinger:</span>{" "}
-          {selectedEmployee && selectedEmployee.department}
+          {formatArray(selectedEmployee && selectedEmployee.department)}
         </p>
         <p>
           <span className="font-bold">Stilling:</span>{" "}
-          {selectedEmployee && selectedEmployee.position}
+          {formatArray(selectedEmployee && selectedEmployee.position)}
         </p>
         <p>
           <span className="font-bold">Overordnet:</span>{" "}
-          {selectedEmployee && selectedEmployee.checkboxes1}
+          {formatArray(selectedEmployee && selectedEmployee.checkboxes1)}
         </p>
         <p>
           <span className="font-bold">IT:</span>{" "}
-          {selectedEmployee && selectedEmployee.checkboxes2}
+          {formatArray(selectedEmployee && selectedEmployee.checkboxes2)}
         </p>
         <p>
           <span className="font-bold">Oprettet:</span>{" "}

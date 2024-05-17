@@ -7,7 +7,8 @@ export default function Testiframe() {
   const [chatlog, setChatlog] = useState([
     {
       sender: "Chatbot",
-      message: "Jeg er en chatbot fra Bilforhandler Pedersen & Nielsen Automobiler. Hvordan kan jeg hjælpe dig i dag?",
+      message:
+        "Jeg er en chatbot fra Bilforhandler Pedersen & Nielsen Automobiler. Hvordan kan jeg hjælpe dig i dag?",
     },
   ]);
   const [isSending, setIsSending] = useState(false); // Flag for at indikere, om en besked er ved at blive sendt
@@ -53,6 +54,9 @@ export default function Testiframe() {
 
   return (
     <Main className="">
+      <div className="font-bold mb-4">
+        <h3>Chatbot</h3>
+      </div>
       <div className="flex flex-col h-full bg-gray-100">
         <div className="flex-1 p-4 overflow-y-auto">
           {chatlog.map((message, index) => (
@@ -64,7 +68,9 @@ export default function Testiframe() {
             >
               <div
                 className={`inline-block rounded-lg p-4 ${
-                  message.sender === "User" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
+                  message.sender === "User"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700"
                 }`}
               >
                 {message.message}

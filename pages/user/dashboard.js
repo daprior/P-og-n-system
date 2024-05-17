@@ -10,7 +10,7 @@ import { IoPeopleCircle } from "react-icons/io5";
 export default function DashboardIndex() {
   return (
     <Main className="">
-      <div className="grid gap-4 ">
+      <div className="grid gap-4 "> 
         <div className="grid grid-cols-6 gap-4">
           <div className="col-span-6 md:col-span-4">
             <Welcome />

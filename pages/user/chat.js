@@ -8,7 +8,7 @@ export default function Testiframe() {
     {
       sender: "Chatbot",
       message:
-        "Jeg er en chatbot fra Bilforhandler Pedersen & Nielsen Automobiler. Hvordan kan jeg hjælpe dig i dag?",
+        "Jeg er en chatbot fra Pedersen & Nielsen. Hvordan kan jeg hjælpe dig i dag?",
     },
   ]);
   const [isSending, setIsSending] = useState(false); // Flag for at indikere, om en besked er ved at blive sendt

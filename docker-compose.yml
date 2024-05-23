@@ -22,4 +22,4 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    command: mongod --logpath /var/log/mongodb/mongod.log --logappend --bind_ip_all  # Ekstra kommando til at specificere MongoDB-logfiler
+    command: mongod --logpath /var/log/mongodb/mongod.log --logappend

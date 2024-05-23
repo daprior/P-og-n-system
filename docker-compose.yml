@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docker-next
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      MONGODB_URI: mongodb+srv://dtn38hyj:dtn38hyj@cluster0.lspkxeu.mongodb.net/DeskProject
+

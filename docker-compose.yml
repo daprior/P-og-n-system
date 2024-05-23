@@ -1,25 +1,25 @@
 services:
   app:
-    image: node:lts-alpine  # Bruger et færdigbygget image fra Docker Hub
+    image: node:lts-alpine
     container_name: docker-next
     ports:
       - '3000:3000'
     volumes:
-      - .:/app  # Mapping af dit app-directory fra værtsmaskinen til containeren
-      - /app/node_modules  # Gemmer node_modules for at undgå geninstallation hver gang
+      - .:/app
+      - /app/node_modules
     depends_on:
       - mongo
-    working_dir: /app  # Arbejdsdirectory i containeren
-    command: sh -c "npm install && npm run dev"  # Kommando til at installere afhængigheder og starte appen
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
 
   mongo:
-    image: mongo  # Bruger et færdigbygget image fra Docker Hub
+    image: mongo
     container_name: mongo
     ports:
       - '27017:27017'
     volumes:
-      - ~/data/mongoDB:/data/db  # Mount til at gemme MongoDB data på værtsmaskinen
+      - ~/data/mongoDB:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    command: mongod --logpath /var/log/mongodb/mongod.log --logappend
+    command: mongod --logpath /var/log/mongodb/mongod.log --logappend --logRotate rename

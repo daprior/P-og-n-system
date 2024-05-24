@@ -2,11 +2,7 @@ import React from "react";
 import { Modal } from "@mantine/core";
 
 export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
-  // Funktion til at formatere arrays med mellemrum
-  const formatArray = (arr) => {
-    if (!arr || !Array.isArray(arr)) return ""; // Håndterer tilfælde, hvor arr ikke er defineret eller ikke er et array
-    return arr.join(", "); // Konverterer array til en streng med elementer adskilt af ", "
-  };
+
 
   return (
     <Modal
@@ -21,14 +17,7 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
       className="p-6"
     >
       <div className="space-y-4">
-      <p>
-          <span className="font-bold">Oprettet af</span>{" "}
-          {selectedEmployee && selectedEmployee.udfyldtaf}
-        </p>
-        <p>
-          <span className="font-bold">ID:</span>{" "}
-          {selectedEmployee && selectedEmployee._id}
-        </p>
+
         <p>
           <span className="font-bold">Name:</span>{" "}
           {selectedEmployee && selectedEmployee.name}
@@ -38,38 +27,10 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
           {selectedEmployee && selectedEmployee.phone}
         </p>
         <p>
-          <span className="font-bold">Brugernavn:</span>{" "}
-          {selectedEmployee && selectedEmployee.username}
+          <span className="font-bold">Email:</span>{" "}
+          {selectedEmployee && selectedEmployee.email}
         </p>
 
-        <p>
-          <span className="font-bold">Job titel:</span>{" "}
-          {selectedEmployee && selectedEmployee.jobTitle}
-        </p>
-        <p>
-          <span className="font-bold">Note:</span>{" "}
-          {selectedEmployee && selectedEmployee.message}
-        </p>
-        <p>
-          <span className="font-bold">Afdelinger:</span>{" "}
-          {formatArray(selectedEmployee && selectedEmployee.department)}
-        </p>
-        <p>
-          <span className="font-bold">Stilling:</span>{" "}
-          {formatArray(selectedEmployee && selectedEmployee.position)}
-        </p>
-        <p>
-          <span className="font-bold">Systemadgange:</span>{" "}
-          {formatArray(selectedEmployee && selectedEmployee.checkboxes1)}
-        </p>
-        <p>
-          <span className="font-bold">Diverse:</span>{" "}
-          {formatArray(selectedEmployee && selectedEmployee.checkboxes2)}
-        </p>
-        <p>
-          <span className="font-bold">Aftale om bestemt tlf model:</span>{" "}
-          {selectedEmployee && selectedEmployee.newPhoneType}
-        </p>
         <p>
           <span className="font-bold">Oprettet:</span>{" "}
           {selectedEmployee &&

@@ -1,33 +1,16 @@
-import mongoose from "mongoose";
-
-const MONGODB_URI = "mongodb://root:example@mongo:27017/";
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+// lib/dbConnect.js
+import sequelize from './sequelize';
+import EmployeeModel from '../models/EmployeeModel';
 
 async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn;
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+    await sequelize.sync(); // Sync all defined models to the DB
+    console.log('All models were synchronized successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
   }
-
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-      maxPoolSize: 4,
-      minPoolSize: 1,
-      useNewUrlParser: true, // Add this line
-      useUnifiedTopology: true, // Add this line
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-  cached.conn = await cached.promise;
-  return cached.conn;
 }
 
 export default dbConnect;

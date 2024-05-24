@@ -1,25 +1,35 @@
 services:
   app:
     image: node:lts-alpine
-    container_name: docker-next
     ports:
       - '3000:3000'
     volumes:
       - .:/app
-      - /app/node_modules
-    depends_on:
-      - mongo
-    working_dir: /app
-    command: sh -c "npm install && npm run dev"
-
-  mongo:
-    image: mongo
-    container_name: mongo
-    ports:
-      - '27017:27017'
-    volumes:
-      - ~/data/mongoDB:/data/db
+    stdin_open: true
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    command: mongod --logpath /var/log/mongodb/mongod.log --logappend --logRotate rename
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=example
+      - MYSQL_USER=example
+      - MYSQL_PASSWORD=example
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.6
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_PASSWORD: example
+      MYSQL_DATABASE: example
+      MYSQL_USER: example
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      - PMA_ARBITRARY=1
+    depends_on:
+      - db

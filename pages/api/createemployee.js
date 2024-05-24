@@ -7,7 +7,7 @@ export default async function addEmployee(req, res) {
 
   try {
     // Opret en ny medarbejder i databasen
-    const result = await new EmployeeModel(employeeData).save();
+    const result = await EmployeeModel.create(employeeData);
     
     // Send responsen til klienten
     res.status(201).json({ success: true, data: result });

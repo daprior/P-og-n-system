@@ -17,21 +17,9 @@ import axios from "axios";
 export default function OnboardIndex() {
   const form = useForm({
     initialValues: {
-      udfyldtaf: "",
       email: "",
       name: "",
-      company: "",
       phone: "",
-      username: "",
-      lastName: "",
-      newPhoneNumber: "",
-      jobTitle: "",
-      department: [],
-      message: "",
-      position: [],
-      checkboxes1: [],
-      checkboxes2: [],
-      newPhoneType: "",
     },
   });
 
@@ -69,20 +57,17 @@ export default function OnboardIndex() {
         <h3>Onboarding</h3>
       </div>
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
-        <Select
-          label="Skema udfyldt af"
-          placeholder="Navn"
-          data={["Daniel Prior", "Jan Langkjær", "Laura Drustrup"]}
-          {...form.getInputProps("udfyldtaf")}
-          size="xs"
-          className="mb-4"
-        />
-        <Divider className="mb-4" />
         <div className="grid gap-4 md:grid-cols-2">
           <TextInput
             label="Navn"
             placeholder="Medarbejder navn"
             {...form.getInputProps("name")}
+            size="xs"
+          />
+            <TextInput
+            label="Email"
+            placeholder="Email"
+            {...form.getInputProps("email")}
             size="xs"
           />
 
@@ -92,95 +77,7 @@ export default function OnboardIndex() {
             {...form.getInputProps("phone")}
             size="xs"
           />
-          <MultiSelect
-            label="Stillingsbetegnelse"
-            placeholder="Vælg"
-            data={["Salg", "Lager", "Værksted", "Administration"]}
-            {...form.getInputProps("position")}
-            size="xs"
-          />
-          <TextInput
-            label="Brugernavn"
-            placeholder="Medarbejder brugernavn"
-            {...form.getInputProps("username")}
-            size="xs"
-          />
-
-          <TextInput
-            label="Jobtitel"
-            placeholder="Medarbejder jobtitel"
-            {...form.getInputProps("jobTitle")}
-            size="xs"
-          />
         </div>
-        <MultiSelect
-          label="Afdeling"
-          className="mt-4"
-          placeholder="Vælg"
-          data={[
-            "Aalborg",
-            "Risskov - Aarhus",
-            "Randers",
-            "Grenaa",
-            "Auning",
-            "Frederikshavn",
-            "Hadsuns",
-            "Sønderborg",
-            "Aabenraa",
-            "Hjørring",
-          ]}
-          {...form.getInputProps("department")}
-          size="xs"
-        />
-        <div className="mt-4">
-          <MultiSelect
-            label="Systemadgange"
-            placeholder="Vælg"
-            data={[
-              "Ford",
-              "Fiat",
-              "Kia",
-              "Mazda",
-              "Renault",
-              "Volvo",
-              "Dracar",
-              "Docubizz",
-              "E-mail",
-              "Bilinfo",
-              "ADT",
-              "Værkstedsplanne",
-              "Nissan",
-              "JAC",
-              "Isuzu",
-              "Maxus",
-            ]}
-            {...form.getInputProps("checkboxes1")}
-            size="xs"
-          />
-        </div>
-        <div className="mt-4">
-          <MultiSelect
-            label="Diverse"
-            placeholder="Vælg"
-            data={["Firma tlf", "Visitkort"]}
-            {...form.getInputProps("checkboxes2")}
-            size="xs"
-          />
-        </div>
-        <TextInput
-          label="Aftale om bestemt telefon."
-          placeholder="Model"
-          className="mt-4"
-          {...form.getInputProps("newPhoneType")}
-          size="xs"
-        />
-        <Textarea
-          label="Note"
-          size="xs"
-          className="mt-4"
-          placeholder="Din besked"
-          {...form.getInputProps("message")}
-        />
         <Button className="bg-black mt-10" type="submit">
           Opret medarbejder
         </Button>
@@ -193,10 +90,18 @@ export default function OnboardIndex() {
         size="sm"
       >
         <Group position="center" mt="md">
-          <Button className="bg-black" color="green" onClick={() => handleConfirmation(true)}>
+          <Button
+            className="bg-black"
+            color="green"
+            onClick={() => handleConfirmation(true)}
+          >
             Ja, opret medarbejder
           </Button>
-          <Button className="bg-black" color="red" onClick={() => handleConfirmation(false)}>
+          <Button
+            className="bg-black"
+            color="red"
+            onClick={() => handleConfirmation(false)}
+          >
             Nej
           </Button>
         </Group>

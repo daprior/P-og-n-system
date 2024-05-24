@@ -6,7 +6,7 @@ export default async function getEmployees(req, res) {
 
   try {
     // Hent alle medarbejdere fra databasen
-    const employees = await EmployeeModel.find();
+    const employees = await EmployeeModel.findAll();
     
     // Send responsen til klienten
     res.status(200).json({ success: true, data: employees });

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import axios from "axios";
-import { TextInput, Table, Loader } from "@mantine/core"; // Assuming Loader component exists
+import { TextInput, Table, Loader } from "@mantine/core";
 import {
   IoPencilOutline,
   IoSearchOutline,
@@ -19,18 +19,19 @@ export default function DashboardIndex() {
     data: employees,
     error,
     isValidating,
-    mutate,
   } = useSWR("/api/getemployees", fetcher);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [
-    isEmployeeModalOpen,
-    { open: openEmployeeModal, close: closeEmployeeModal },
-  ] = useDisclosure(false);
-  const [
-    isEmployeeEditModalOpen,
-    { open: openEmployeeEditModal, close: closeEmployeeEditModal },
-  ] = useDisclosure(false);
+  const {
+    open: openEmployeeModal,
+    close: closeEmployeeModal,
+    isOpen: isEmployeeModalOpen,
+  } = useDisclosure(false);
+  const {
+    open: openEmployeeEditModal,
+    close: closeEmployeeEditModal,
+    isOpen: isEmployeeEditModalOpen,
+  } = useDisclosure(false);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -45,6 +46,7 @@ export default function DashboardIndex() {
     setSelectedEmployee(employee);
     openEmployeeEditModal();
   };
+
 
   const rows = isValidating ? (
     <Table.Tr>
@@ -64,8 +66,8 @@ export default function DashboardIndex() {
         employee.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
       .map((employee) => (
-        <Table.Tr key={employee._id}>
-          <Table.Td>{employee._id}</Table.Td>
+        <Table.Tr key={employee.name}>
+          <Table.Td>{employee.id}</Table.Td>
           <Table.Td>
             {employee.createdAt &&
               new Date(employee.createdAt).toLocaleDateString("da-DK")}
@@ -83,7 +85,10 @@ export default function DashboardIndex() {
                 onClick={() => handleEmployeeEditModalClick(employee)}
                 className="h-5 w-5 cursor-pointer"
               />
-              <IoTrashBinOutline className="h-5 w-5" />
+              <IoTrashBinOutline
+            
+                className="h-5 w-5 cursor-pointer"
+              />
             </div>
           </Table.Td>
         </Table.Tr>
@@ -127,7 +132,7 @@ export default function DashboardIndex() {
         opened={isEmployeeEditModalOpen}
         onClose={() => {
           closeEmployeeEditModal();
-          mutate(); // Revalidate the data when the modal closes
+          mutate("/api/getemployees"); // Revalidate the data when the modal closes
         }}
         selectedEmployee={selectedEmployee}
       />

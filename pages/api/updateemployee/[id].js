@@ -9,10 +9,11 @@ export default async function updateEmployee(req, res) {
 
   if (req.method === "PUT") {
     try {
-      const result = await EmployeeModel.findByIdAndUpdate(id, employeeData, { new: true });
+      const result = await EmployeeModel.findByPk(id);
       if (!result) {
         return res.status(404).json({ success: false, error: "Medarbejder ikke fundet." });
       }
+      await result.update(employeeData);
       res.status(200).json({ success: true, data: result });
     } catch (error) {
       console.error("Fejl ved opdatering af medarbejder:", error);

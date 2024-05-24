@@ -19,42 +19,20 @@ export default function EmployeeEditModal({
 }) {
   const form = useForm({
     initialValues: {
-      udfyldtaf: "",
       email: "",
       name: "",
-      company: "",
+
       phone: "",
-      username: "",
-      lastName: "",
-      newPhoneNumber: "",
-      jobTitle: "",
-      department: [],
-      message: "",
-      position: [],
-      checkboxes1: [],
-      checkboxes2: [],
-      newPhoneType: "",
     },
   });
 
   useEffect(() => {
     if (selectedEmployee) {
       form.setValues({
-        udfyldtaf: selectedEmployee.udfyldtaf || "",
         email: selectedEmployee.email || "",
         name: selectedEmployee.name || "",
-        company: selectedEmployee.company || "",
+
         phone: selectedEmployee.phone || "",
-        username: selectedEmployee.username || "",
-        lastName: selectedEmployee.lastName || "",
-        newPhoneType: selectedEmployee.newPhoneType || "",
-        newPhoneNumber: selectedEmployee.newPhoneNumber || "",
-        jobTitle: selectedEmployee.jobTitle || "",
-        department: selectedEmployee.department || [],
-        message: selectedEmployee.message || "",
-        position: selectedEmployee.position || [],
-        checkboxes1: selectedEmployee.checkboxes1 || [],
-        checkboxes2: selectedEmployee.checkboxes2 || [],
       });
     }
   }, [selectedEmployee, form.setValues]);
@@ -99,87 +77,13 @@ export default function EmployeeEditModal({
           {...form.getInputProps("phone")}
           size="xs"
         />
-        <MultiSelect
-          label="Stillingsbetegnelse"
-          placeholder="Vælg"
-          data={["Salg", "Lager", "Værksted", "Administration"]}
-          {...form.getInputProps("position")}
-          size="xs"
-        />
         <TextInput
-          label="Brugernavn"
-          placeholder="Medarbejder brugernavn"
-          {...form.getInputProps("username")}
+          label="Email"
+          placeholder="Medarbejder email"
+          {...form.getInputProps("email")}
           size="xs"
         />
 
-        <TextInput
-          label="Jobtitel"
-          placeholder="Medarbejder jobtitel"
-          {...form.getInputProps("jobTitle")}
-          size="xs"
-        />
-        <MultiSelect
-          label="Afdeling"
-          placeholder="Vælg"
-          data={[
-            "Aalborg",
-            "Risskov - Aarhus",
-            "Randers",
-            "Grenaa",
-            "Auning",
-            "Frederikshavn",
-            "Hadsuns",
-            "Sønderborg",
-            "Aabenraa",
-            "Hjørring",
-          ]}
-          {...form.getInputProps("department")}
-          size="xs"
-        />
-        <MultiSelect
-          label="Overordnet"
-          placeholder="Vælg"
-          data={[
-            "Ford",
-            "Fiat",
-            "Kia",
-            "Mazda",
-            "Renault",
-            "Volvo",
-            "Dracar",
-            "Docubizz",
-            "E-mail",
-            "Bilinfo",
-            "ADT",
-            "Værkstedsplanne",
-            "Nissan",
-            "JAC",
-            "Isuzu",
-            "Maxus",
-          ]}
-          {...form.getInputProps("checkboxes1")}
-          size="xs"
-        />
-        <MultiSelect
-          label="IT"
-          placeholder="Vælg"
-          data={["Firma tlf", "Visitkort"]}
-          {...form.getInputProps("checkboxes2")}
-          size="xs"
-        />
-        <TextInput
-          label="Aftale om bestemt telefon"
-          placeholder="Model"
-          {...form.getInputProps("newPhoneType")}
-          size="xs"
-        />
-        <Textarea
-          label="Note"
-          size="xs"
-          placeholder="Din besked"
-          {...form.getInputProps("message")}
-        />
         <Button type="submit" className="bg-black mt-4">
           Opdater medarbejder
         </Button>

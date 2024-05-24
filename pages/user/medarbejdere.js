@@ -20,18 +20,17 @@ export default function DashboardIndex() {
     error,
     isValidating,
   } = useSWR("/api/getemployees", fetcher);
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const {
-    open: openEmployeeModal,
-    close: closeEmployeeModal,
-    isOpen: isEmployeeModalOpen,
-  } = useDisclosure(false);
-  const {
-    open: openEmployeeEditModal,
-    close: closeEmployeeEditModal,
-    isOpen: isEmployeeEditModalOpen,
-  } = useDisclosure(false);
+  const [
+    isEmployeeModalOpen,
+    { open: openEmployeeModal, close: closeEmployeeModal },
+  ] = useDisclosure(false);
+  const [
+    isEmployeeEditModalOpen,
+    { open: openEmployeeEditModal, close: closeEmployeeEditModal },
+  ] = useDisclosure(false);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);

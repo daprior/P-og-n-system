@@ -6,6 +6,7 @@ services:
     volumes:
       - .:/app
     stdin_open: true
+    working_dir: /app
     environment:
       - MYSQL_HOST=db
       - MYSQL_DATABASE=example
@@ -13,10 +14,14 @@ services:
       - MYSQL_PASSWORD=example
     depends_on:
       - db
+    command: sh -c "npm install && npm run dev"
 
   db:
     image: mariadb:10.6
     restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --expire-logs-days=2
+    volumes:
+      - ~/data/mysql:/var/lib/mysq
     ports:
       - '3306:3306'
     environment:

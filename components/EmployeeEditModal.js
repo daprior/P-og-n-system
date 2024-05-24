@@ -39,7 +39,7 @@ export default function EmployeeEditModal({
 
   const handleUpdate = async (values) => {
     try {
-      await axios.put(`/api/updateemployee/${selectedEmployee._id}`, values);
+      await axios.put(`/api/updateemployee/${selectedEmployee.id}`, values);
       notifications.show({
         title: "Opdateret",
         color: "green",
@@ -58,7 +58,7 @@ export default function EmployeeEditModal({
 
   return (
     <Modal
-      key={selectedEmployee ? selectedEmployee._id : "new"}
+      key={selectedEmployee ? selectedEmployee.id : "new"}
       opened={opened}
       onClose={onClose}
       size="xl"

@@ -21,7 +21,7 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --expire-logs-days=2
     volumes:
-      - ~/data/mysql:/var/lib/mysq
+      - ~/data/mysql:/var/lib/mysql
     ports:
       - '3306:3306'
     environment:

@@ -45,7 +45,6 @@ export default function Main({ children, style = "" }) {
       icon: IoPhonePortraitOutline,
     },
     { name: "Tjekliste", href: `/user/checklist`, icon: IoDocumentOutline },
-    { name: "Chat", href: `/user/chat`, icon: IoChatboxOutline },
   ];
 
   const teams = [

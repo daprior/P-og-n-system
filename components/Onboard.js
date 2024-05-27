@@ -17,9 +17,18 @@ import axios from "axios";
 export default function OnboardIndex() {
   const form = useForm({
     initialValues: {
-      email: "",
+      createdby: "",
       name: "",
       phone: "",
+      email: "",
+      username: "",
+      jobtitle: "",
+      note: "",
+      department: [],
+      position: [],
+      accesses: [],
+      misc: [],
+      phonemodel: "",
     },
   });
 
@@ -57,6 +66,13 @@ export default function OnboardIndex() {
         <h3>Onboarding</h3>
       </div>
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
+        <TextInput
+          label="Oprettet af"
+          className="mb-4"
+          placeholder="Navn"
+          {...form.getInputProps("createdby")}
+          size="xs"
+        />
         <div className="grid gap-4 md:grid-cols-2">
           <TextInput
             label="Navn"
@@ -64,20 +80,70 @@ export default function OnboardIndex() {
             {...form.getInputProps("name")}
             size="xs"
           />
-            <TextInput
-            label="Email"
-            placeholder="Email"
-            {...form.getInputProps("email")}
-            size="xs"
-          />
-
           <TextInput
             label="Telefonnummer"
             placeholder="Medarbejder telefonnummer"
             {...form.getInputProps("phone")}
             size="xs"
           />
+          <TextInput
+            label="Email"
+            placeholder="Email"
+            {...form.getInputProps("email")}
+            size="xs"
+          />
+          <TextInput
+            label="Brugernavn"
+            placeholder="brugernavn"
+            {...form.getInputProps("username")}
+            size="xs"
+          />
+          <TextInput
+            label="Job titel"
+            placeholder="titel"
+            {...form.getInputProps("jobtitle")}
+            size="xs"
+          />
+
+          <MultiSelect
+            label="Afdeling"
+            size="xs"
+            data={['Aalborg', 'Risskov', 'Randers', 'Grenaa', 'Auning', 'Frederikshavn', 'Hadsund', 'Sønderborg', 'Aabenraa', 'Hjørring']}
+            {...form.getInputProps("department")}
+          />
+
+          <MultiSelect
+            label="Position"
+            size="xs"
+            data={['Salg', 'Administration', 'Lager', 'Værksted', 'Klargøring', 'IT', 'Andet']}
+            {...form.getInputProps("position")}
+          />
+          <MultiSelect
+            label="Adgange"
+            size="xs"
+            data={['Fiat', 'Ford', 'Kia', 'Mazda', 'Renault', 'Volvo', 'Dracar', 'DocuBizz', 'E-mail', 'Bilinfo', 'ADT', 'Værkstedsplanne', 'Isuzu', 'Maxus', 'JAC' ]}
+            {...form.getInputProps("accesses")}
+          />
+          <MultiSelect
+            label="Diverse"
+            size="xs"
+            data={['Visitkort', 'Firmabetalt telefon']}
+            {...form.getInputProps("misc")}
+          />
+           <TextInput
+            label="Bestemt tlf"
+            placeholder="Iphone.."
+            {...form.getInputProps("phonemodel")}
+            size="xs"
+          />
         </div>
+        <Textarea
+          label="Note på medarbejder"
+          className="mt-4"
+          placeholder="Note"
+          {...form.getInputProps("note")}
+          size="xs"
+        />
         <Button className="bg-black mt-10" type="submit">
           Opret medarbejder
         </Button>

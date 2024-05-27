@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
 import axios from "axios";
-import { TextInput, Table, Loader } from "@mantine/core";
+import { TextInput, Table, Loader, Modal, Group, Button } from "@mantine/core";
 import {
   IoPencilOutline,
   IoSearchOutline,
@@ -11,6 +11,7 @@ import { useDisclosure } from "@mantine/hooks";
 import EmployeeModal from "/components/EmployeeModal";
 import EmployeeEditModal from "/components/EmployeeEditModal";
 import Main from "components/layouts/Main";
+import { notifications } from "@mantine/notifications";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
@@ -20,9 +21,11 @@ export default function DashboardIndex() {
     error,
     isValidating,
   } = useSWR("/api/getemployees", fetcher);
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const [
     isEmployeeModalOpen,
     { open: openEmployeeModal, close: closeEmployeeModal },
@@ -46,6 +49,32 @@ export default function DashboardIndex() {
     openEmployeeEditModal();
   };
 
+  const handleDeleteModalClick = (employee) => {
+    setSelectedEmployee(employee);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirmation = async (confirmed) => {
+    if (confirmed && selectedEmployee) {
+      try {
+        await axios.delete(`/api/deleteemployee/${selectedEmployee.id}`);
+        mutate("/api/getemployees");
+        notifications.show({
+          title: "Slettet",
+          color: "green",
+          message: `${selectedEmployee.name} er nu slettet.`,
+        });
+      } catch (error) {
+        notifications.show({
+          title: "Fejl",
+          color: "red",
+          message: "Der opstod en fejl ved sletning af medarbejderen.",
+        });
+      }
+    }
+    setDeleteModalOpen(false);
+    setSelectedEmployee(null);
+  };
 
   const rows = isValidating ? (
     <Table.Tr>
@@ -73,7 +102,7 @@ export default function DashboardIndex() {
           </Table.Td>
           <Table.Td>{employee.name}</Table.Td>
           <Table.Td>{employee.phone}</Table.Td>
-          <Table.Td>{employee.udfyldtaf}</Table.Td>
+          <Table.Td>{employee.createdby}</Table.Td>
           <Table.Td>
             <div className="flex gap-4">
               <IoSearchOutline
@@ -85,7 +114,7 @@ export default function DashboardIndex() {
                 className="h-5 w-5 cursor-pointer"
               />
               <IoTrashBinOutline
-            
+                onClick={() => handleDeleteModalClick(employee)}
                 className="h-5 w-5 cursor-pointer"
               />
             </div>
@@ -135,6 +164,30 @@ export default function DashboardIndex() {
         }}
         selectedEmployee={selectedEmployee}
       />
+
+      <Modal
+        opened={isDeleteModalOpen}
+        onClose={() => handleDeleteConfirmation(false)}
+        title={`Er du sikker på, at du vil slette ${selectedEmployee?.name}?`}
+        size="sm"
+      >
+        <Group position="center" mt="md">
+          <Button
+            className="bg-black"
+            color="green"
+            onClick={() => handleDeleteConfirmation(true)}
+          >
+            Ja, slet medarbejder
+          </Button>
+          <Button
+            className="bg-black"
+            color="red"
+            onClick={() => handleDeleteConfirmation(false)}
+          >
+            Nej
+          </Button>
+        </Group>
+      </Modal>
     </Main>
   );
 }

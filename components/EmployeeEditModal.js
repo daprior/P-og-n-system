@@ -19,20 +19,42 @@ export default function EmployeeEditModal({
 }) {
   const form = useForm({
     initialValues: {
-      email: "",
+      createdby: "",
       name: "",
-
       phone: "",
+      email: "",
+      username: "",
+      jobtitle: "",
+      note: "",
+      department: [],
+      position: [],
+      accesses: [],
+      misc: [],
+      phonemodel: "",
     },
   });
 
   useEffect(() => {
     if (selectedEmployee) {
       form.setValues({
-        email: selectedEmployee.email || "",
+        createdby: selectedEmployee.createdby || "",
         name: selectedEmployee.name || "",
-
         phone: selectedEmployee.phone || "",
+        email: selectedEmployee.email || "",
+        username: selectedEmployee.username || "",
+        jobtitle: selectedEmployee.jobtitle || "",
+        note: selectedEmployee.note || "",
+        department: selectedEmployee.department
+          ? JSON.parse(selectedEmployee.department)
+          : [],
+        position: selectedEmployee.position
+          ? JSON.parse(selectedEmployee.position)
+          : [],
+        accesses: selectedEmployee.accesses
+          ? JSON.parse(selectedEmployee.accesses)
+          : [],
+        misc: selectedEmployee.misc ? JSON.parse(selectedEmployee.misc) : [],
+        phonemodel: selectedEmployee.phonemodel || "",
       });
     }
   }, [selectedEmployee, form.setValues]);
@@ -56,6 +78,7 @@ export default function EmployeeEditModal({
     }
   };
 
+  console.log(selectedEmployee);
   return (
     <Modal
       key={selectedEmployee ? selectedEmployee.id : "new"}
@@ -65,6 +88,12 @@ export default function EmployeeEditModal({
       title="Rediger medarbejder"
     >
       <form onSubmit={form.onSubmit(handleUpdate)}>
+        <TextInput
+          label="Oprettet af"
+          placeholder="Navn"
+          {...form.getInputProps("createdby")}
+          size="xs"
+        />
         <TextInput
           label="Navn"
           placeholder="Medarbejder navn"
@@ -81,6 +110,91 @@ export default function EmployeeEditModal({
           label="Email"
           placeholder="Medarbejder email"
           {...form.getInputProps("email")}
+          size="xs"
+        />
+        <TextInput
+          label="Brugernavn"
+          placeholder="brugernavn"
+          {...form.getInputProps("username")}
+          size="xs"
+        />
+        <TextInput
+          label="Job titel"
+          placeholder="titel"
+          {...form.getInputProps("jobtitle")}
+          size="xs"
+        />
+
+        <MultiSelect
+          label="Afdeling"
+          size="xs"
+          data={[
+            "Aalborg",
+            "Risskov",
+            "Randers",
+            "Grenaa",
+            "Auning",
+            "Frederikshavn",
+            "Hadsund",
+            "Sønderborg",
+            "Aabenraa",
+            "Hjørring",
+          ]}
+          {...form.getInputProps("department")}
+        />
+        <MultiSelect
+          label="Position"
+          size="xs"
+          data={[
+            "Salg",
+            "Administration",
+            "Lager",
+            "Værksted",
+            "Klargøring",
+            "IT",
+            "Andet",
+          ]}
+          {...form.getInputProps("position")}
+        />
+        <MultiSelect
+          label="Adgange"
+          size="xs"
+          data={[
+            "Fiat",
+            "Ford",
+            "Kia",
+            "Mazda",
+            "Renault",
+            "Volvo",
+            "Dracar",
+            "DocuBizz",
+            "E-mail",
+            "Bilinfo",
+            "ADT",
+            "Værkstedsplanne",
+            "Isuzu",
+            "Maxus",
+            "JAC",
+          ]}
+          {...form.getInputProps("accesses")}
+        />
+        <MultiSelect
+          label="Diverse"
+          size="xs"
+          data={["Visitkort", "Firmabetalt telefon"]}
+          {...form.getInputProps("misc")}
+        />
+
+        <Textarea
+          label="Note"
+          placeholder="Medarbejder note"
+          {...form.getInputProps("note")}
+          size="xs"
+        />
+        <TextInput
+          label="Aftalt telefon model"
+          placeholder="Model"
+          {...form.getInputProps("phonemodel")}
           size="xs"
         />
 

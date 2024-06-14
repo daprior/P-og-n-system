@@ -38,22 +38,44 @@ export default function OnboardIndex() {
     setShowConfirmation(true);
   };
 
+    // Function to send email using nodemailer
+    const sendEmail = async (emailData) => {
+      try {
+        const response = await axios.post("/api/sendEmail", emailData);
+        console.log("Email sent:", response.data);
+      } catch (error) {
+        console.error('Error sending email:', error);
+        throw error;
+      }
+    };
+
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
       try {
         const response = await axios.post("/api/createemployee", form.values);
-        console.log("Medarbejder oprettet:", response.data);
+        console.log("Employee created:", response.data);
         notifications.show({
-          title: "Oprettet",
+          title: "Created",
           color: "green",
-          message: "Medarbejderen er nu oprettet.",
+          message: "Employee has been created successfully.",
         });
+
+        // Call sendEmail function to notify about employee creation
+        const emailData = {
+          to: 'daniel.prior@autohus.dk', // Replace with actual recipient email
+          subject: 'New Employee Created',
+          text: `A new employee has been created:\n\nName: ${form.values.name}\nEmail: ${form.values.email}`,
+        };
+
+        await sendEmail(emailData);
+        console.log('Email sent successfully');
+
       } catch (error) {
-        console.error("Fejl ved oprettelse af medarbejder:", error);
+        console.error('Error creating employee:', error);
         notifications.show({
-          title: "Fejl",
+          title: "Error",
           color: "red",
-          message: "Der opstod en fejl ved oprettelse af medarbejderen.",
+          message: "Failed to create employee.",
         });
       }
     }

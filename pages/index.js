@@ -10,7 +10,7 @@ export default function Index() {
 
         <div className="pt-10 pr-20 pl-20 pb-20  shadow-xl mt-10 rounded-lg bg-white">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Opret medarbejder dasmjhdjasdhjas
+          Opret medarbejder V1
         </h2>
           <Onboard />
         </div>

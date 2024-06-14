@@ -14,7 +14,7 @@ services:
       - MYSQL_PASSWORD=example
     depends_on:
       - db
-    command: sh -c "npm install && npm run dev"
+     command: sh -c "apk update && apk add git && npm install && npm run dev"  # Add 'git' installation here
 
   db:
     image: mariadb:10.6

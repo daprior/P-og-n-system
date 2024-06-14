@@ -38,16 +38,15 @@ export default function OnboardIndex() {
     setShowConfirmation(true);
   };
 
-    // Function to send email using nodemailer
-    const sendEmail = async (emailData) => {
-      try {
-        const response = await axios.post("/api/sendEmail", emailData);
-        console.log("Email sent:", response.data);
-      } catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
-      }
-    };
+  const sendEmail = async (emailData) => {
+    try {
+      const response = await axios.post("/api/sendEmail", emailData);
+      console.log("Email sent:", response.data);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw error;
+    }
+  };
 
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
@@ -59,17 +58,33 @@ export default function OnboardIndex() {
           color: "green",
           message: "Employee has been created successfully.",
         });
-
-        // Call sendEmail function to notify about employee creation
+  
+        // Prepare email data with all form fields
         const emailData = {
           to: 'daniel.prior@autohus.dk', // Replace with actual recipient email
           subject: 'New Employee Created',
-          text: `A new employee has been created:\n\nName: ${form.values.name}\nEmail: ${form.values.email}`,
+          text: `
+            A new employee has been created:
+  
+            Name: ${form.values.name}
+            Email: ${form.values.email}
+            Phone: ${form.values.phone}
+            Username: ${form.values.username}
+            Job Title: ${form.values.jobtitle}
+            Department: ${form.values.department.join(', ')}
+            Position: ${form.values.position.join(', ')}
+            Accesses: ${form.values.accesses.join(', ')}
+            Misc: ${form.values.misc.join(', ')}
+            Phone Model: ${form.values.phonemodel}
+  
+            Note: ${form.values.note}
+          `,
         };
-
+  
+        // Call sendEmail function to notify about employee creation
         await sendEmail(emailData);
         console.log('Email sent successfully');
-
+  
       } catch (error) {
         console.error('Error creating employee:', error);
         notifications.show({
@@ -130,29 +145,64 @@ export default function OnboardIndex() {
           <MultiSelect
             label="Afdeling"
             size="xs"
-            data={['Aalborg', 'Risskov', 'Randers', 'Grenaa', 'Auning', 'Frederikshavn', 'Hadsund', 'Sønderborg', 'Aabenraa', 'Hjørring']}
+            data={[
+              "Aalborg",
+              "Risskov",
+              "Randers",
+              "Grenaa",
+              "Auning",
+              "Frederikshavn",
+              "Hadsund",
+              "Sønderborg",
+              "Aabenraa",
+              "Hjørring",
+            ]}
             {...form.getInputProps("department")}
           />
 
           <MultiSelect
             label="Position"
             size="xs"
-            data={['Salg', 'Administration', 'Lager', 'Værksted', 'Klargøring', 'IT', 'Andet']}
+            data={[
+              "Salg",
+              "Administration",
+              "Lager",
+              "Værksted",
+              "Klargøring",
+              "IT",
+              "Andet",
+            ]}
             {...form.getInputProps("position")}
           />
           <MultiSelect
             label="Adgange"
             size="xs"
-            data={['Fiat', 'Ford', 'Kia', 'Mazda', 'Renault', 'Volvo', 'Dracar', 'DocuBizz', 'E-mail', 'Bilinfo', 'ADT', 'Værkstedsplanne', 'Isuzu', 'Maxus', 'JAC' ]}
+            data={[
+              "Fiat",
+              "Ford",
+              "Kia",
+              "Mazda",
+              "Renault",
+              "Volvo",
+              "Dracar",
+              "DocuBizz",
+              "E-mail",
+              "Bilinfo",
+              "ADT",
+              "Værkstedsplanne",
+              "Isuzu",
+              "Maxus",
+              "JAC",
+            ]}
             {...form.getInputProps("accesses")}
           />
           <MultiSelect
             label="Diverse"
             size="xs"
-            data={['Visitkort', 'Firmabetalt telefon']}
+            data={["Visitkort", "Firmabetalt telefon"]}
             {...form.getInputProps("misc")}
           />
-           <TextInput
+          <TextInput
             label="Bestemt tlf"
             placeholder="Iphone.."
             {...form.getInputProps("phonemodel")}

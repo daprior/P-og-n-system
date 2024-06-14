@@ -1,17 +1,16 @@
-// pages/api/addEmployee.js
-
 import dbConnect from '/utils/db';
 import EmployeeModel from '/models/EmployeeModel';
 import sendEmail from '/utils/sendEmail';
 
 export default async function addEmployee(req, res) {
   const employeeData = req.body;
-  await dbConnect();
 
   try {
+    await dbConnect(); // Ensure database connection is established
+
     // Create a new employee in the database
     const result = await EmployeeModel.create(employeeData);
-    
+
     // Send email notification
     const to = 'daniel.prior@autohus.dk'; // replace with the actual recipient email
     const subject = 'New Employee Created';

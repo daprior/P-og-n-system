@@ -63,7 +63,7 @@ export default function OnboardIndex() {
   return (
     <div>
       <div className="font-bold mb-4">
-        <h3>Onboarding</h3>
+        <h3>Onboarding v1</h3>
       </div>
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
         <TextInput

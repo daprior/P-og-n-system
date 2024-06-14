@@ -1,6 +1,6 @@
 // utils/sendEmail.js
 
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -14,16 +14,17 @@ const transporter = nodemailer.createTransport({
 
 export default async function sendEmail(to, subject, text) {
   const mailOptions = {
-    from: '"Your Company" <no-reply@yourcompany.com>', // sender address
-    to: to, // list of receivers
-    subject: subject, // Subject line
-    text: text, // plain text body
+    from: "Daniel.prior@autohus.dk", // Set the from address
+    to: to,
+    subject: subject,
+    text: text,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully');
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent:", info.response);
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error("Error sending email:", error);
+    throw error; // Rethrow the error to handle it in the calling function
   }
 }

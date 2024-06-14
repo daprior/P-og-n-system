@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 export default async function sendEmail(to, subject, text) {
   const mailOptions = {
-    from: "Daniel.prior@autohus.dk", // Set the from address
+    from: "daniel.prior@autohus.dk", // Set the from address
     to: to,
     subject: subject,
     text: text,

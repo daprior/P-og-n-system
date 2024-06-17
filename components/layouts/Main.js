@@ -39,21 +39,21 @@ export default function Main({ children, style = "" }) {
     { name: "Dashboard", href: `/user/dashboard`, icon: RiDashboard2Line },
     { name: "Onboard", href: `/user/onboarding`, icon: MagnifyingGlassIcon },
     { name: "Medarbejdere", href: `/user/medarbejdere`, icon: RiArchive2Line },
-    {
-      name: "Udstyrsliste",
-      href: `/user/equipment`,
-      icon: IoPhonePortraitOutline,
-    },
+    // {
+    //   name: "Udstyrsliste",
+    //   href: `/user/equipment`,
+    //   icon: IoPhonePortraitOutline,
+    // },
     { name: "Tjekliste", href: `/user/checklist`, icon: IoDocumentOutline },
   ];
 
   const teams = [
-    {
-      id: 1,
-      name: "#",
-      href: "#",
-      initial: "W",
-    },
+    // {
+    //   id: 1,
+    //   name: "#",
+    //   href: "#",
+    //   initial: "W",
+    // },
   ];
   const userNavigation = [{ name: "Forside", href: "/" }];
 
@@ -176,7 +176,7 @@ export default function Main({ children, style = "" }) {
                             ))}
                           </ul>
                         </li>
-                        <li className="mt-auto">
+                        {/* <li className="mt-auto">
                           <Link
                             href={`#`}
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
@@ -187,7 +187,7 @@ export default function Main({ children, style = "" }) {
                             />
                             Dokumenter
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>
@@ -279,7 +279,7 @@ export default function Main({ children, style = "" }) {
                     />
                     Indstillinger
                   </Link> */}
-                  <Link
+                  {/* <Link
                     href={`#`}
                     className="group -mx-2 flex gap-x-3 rounded-md p-1.5 text-sm font-normal leading-6 text-[#909090] hover:bg-[#1c1e20] hover:text-white"
                   >
@@ -288,7 +288,7 @@ export default function Main({ children, style = "" }) {
                       aria-hidden="true"
                     />
                     Dokumenter
-                  </Link>
+                  </Link> */}
                 </li>
               </ul>
             </nav>

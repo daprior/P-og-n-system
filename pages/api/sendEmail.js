@@ -1,5 +1,3 @@
-// pages/api/sendEmail.js
-
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
@@ -19,7 +17,7 @@ export default async function handler(req, res) {
     try {
       // Send email
       await transporter.sendMail({
-        from: `"Your Company" <${process.env.SMTP_USER}>`,
+        from: `"Pedersen & Nielsen" <${process.env.SMTP_USER}>`,
         to,
         subject,
         text,

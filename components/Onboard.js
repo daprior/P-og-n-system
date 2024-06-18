@@ -21,7 +21,6 @@ export default function OnboardIndex() {
       email: "",
       username: "",
       jobtitle: "",
-      startDate: "",
       note: "",
       department: [],
       position: [],
@@ -75,7 +74,6 @@ export default function OnboardIndex() {
             Accesses: ${form.values.accesses.join(", ")}
             Misc: ${form.values.misc.join(", ")}
             Phone Model: ${form.values.phonemodel}
-            Start dato: ${form.values.startDate}
             Note: ${form.values.note}
           `,
         };
@@ -131,12 +129,6 @@ export default function OnboardIndex() {
             label="Brugernavn"
             placeholder="brugernavn"
             {...form.getInputProps("username")}
-            size="xs"
-          />
-          <TextInput
-            label="Start dato"
-            placeholder="05-02-2024"
-            {...form.getInputProps("startDate")}
             size="xs"
           />
           <TextInput

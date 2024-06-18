@@ -34,10 +34,6 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
           {selectedEmployee && selectedEmployee.phone}
         </p>
         <p>
-          <span className="font-bold">Start dato</span>{" "}
-          {selectedEmployee && selectedEmployee.startDate}
-        </p>
-        <p>
           <span className="font-bold">Email:</span>{" "}
           {selectedEmployee && selectedEmployee.email}
         </p>

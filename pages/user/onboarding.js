@@ -1,7 +1,8 @@
 import Main from "components/layouts/Main";
 import Onboard from "components/Onboard"
+import withAuthProtection from '../../components/withAuthProtection';
 
-export default function OnboardIndex() {
+function OnboardIndex() {
 
   return (
     <Main className="">
@@ -9,3 +10,5 @@ export default function OnboardIndex() {
     </Main>
   );
 }
+
+export default withAuthProtection(OnboardIndex);

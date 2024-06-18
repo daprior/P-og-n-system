@@ -31,6 +31,7 @@ export default function EmployeeEditModal({
       accesses: [],
       misc: [],
       phonemodel: "",
+      startDate: "",
     },
   });
 
@@ -43,6 +44,7 @@ export default function EmployeeEditModal({
         email: selectedEmployee.email || "",
         username: selectedEmployee.username || "",
         jobtitle: selectedEmployee.jobtitle || "",
+        startDate: selectedEmployee.startDate || "",
         note: selectedEmployee.note || "",
         department: selectedEmployee.department
           ? JSON.parse(selectedEmployee.department)

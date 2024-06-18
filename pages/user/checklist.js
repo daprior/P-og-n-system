@@ -1,8 +1,9 @@
 import React from "react";
 import Main from "components/layouts/Main";
 import { Button } from "@mantine/core";
+import withAuthProtection from '../../components/withAuthProtection';
 
-export default function DashboardIndex() {
+function ChecklistIndex() {
   const pdfUrl = "/Tjekliste-til-onboarding.pdf"; // Replace with the actual filename
 
   const downloadPdf = () => {
@@ -47,3 +48,6 @@ export default function DashboardIndex() {
     </Main>
   );
 }
+
+
+export default withAuthProtection(ChecklistIndex);

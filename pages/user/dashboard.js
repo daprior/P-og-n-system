@@ -6,8 +6,9 @@ import Feature from "../../components/Dashboard/Feature";
 import BasicStats from "../../components/Dashboard/Basicstats";
 import { IoIosStats, IoIosDocument } from "react-icons/io";
 import { IoPeopleCircle } from "react-icons/io5";
+import withAuthProtection from '../../components/withAuthProtection';
 
-export default function DashboardIndex() {
+function DashboardIndex() {
   return (
     <Main className="">
       <div className="grid gap-4 "> 
@@ -47,3 +48,5 @@ export default function DashboardIndex() {
     </Main>
   );
 }
+
+export default withAuthProtection(DashboardIndex);

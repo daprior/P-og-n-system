@@ -17,6 +17,10 @@ const EmployeeModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    startDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: true,

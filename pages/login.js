@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router'; // Using Next.js router
-import { Button, PasswordInput, TextInput, Notification } from "@mantine/core";
+import { PasswordInput, TextInput, Notification } from "@mantine/core";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -17,7 +17,9 @@ export default function Login() {
     
     // Check if the input matches the correct email and password
     if (email === correctEmail && password === correctPassword) {
-      // Redirect to the next page
+      // Set authentication status
+      localStorage.setItem('isLoggedIn', 'true');
+      // Redirect to the dashboard
       router.push('/user/dashboard');
     } else {
       // Show error notification
@@ -28,9 +30,8 @@ export default function Login() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <img src="/logo.png" className="h-16 w-48"></img>
+        <img src="/logo.png" className="h-16 w-48" alt="Logo"></img>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Login
           </h2>

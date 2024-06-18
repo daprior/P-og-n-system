@@ -4,8 +4,6 @@ import {
   Textarea,
   Button,
   MultiSelect,
-  Select,
-  Divider,
   Modal,
   Group,
 } from "@mantine/core";
@@ -23,6 +21,7 @@ export default function OnboardIndex() {
       email: "",
       username: "",
       jobtitle: "",
+      startDate: "",
       note: "",
       department: [],
       position: [],
@@ -58,35 +57,34 @@ export default function OnboardIndex() {
           color: "green",
           message: "Employee has been created successfully.",
         });
-  
+
         // Prepare email data with all form fields
         const emailData = {
-          to: 'daniel.prior@autohus.dk', // Replace with actual recipient email
-          subject: 'New Employee Created',
+          to: "daniel.prior@autohus.dk", // Replace with actual recipient email
+          subject: "New Employee Created",
           text: `
             A new employee has been created:
-  
+
             Name: ${form.values.name}
             Email: ${form.values.email}
             Phone: ${form.values.phone}
             Username: ${form.values.username}
             Job Title: ${form.values.jobtitle}
-            Department: ${form.values.department.join(', ')}
-            Position: ${form.values.position.join(', ')}
-            Accesses: ${form.values.accesses.join(', ')}
-            Misc: ${form.values.misc.join(', ')}
+            Department: ${form.values.department.join(", ")}
+            Position: ${form.values.position.join(", ")}
+            Accesses: ${form.values.accesses.join(", ")}
+            Misc: ${form.values.misc.join(", ")}
             Phone Model: ${form.values.phonemodel}
-  
+            Start dato: ${form.values.startDate}
             Note: ${form.values.note}
           `,
         };
-  
+
         // Call sendEmail function to notify about employee creation
         await sendEmail(emailData);
-        console.log('Email sent successfully');
-  
+        console.log("Email sent successfully");
       } catch (error) {
-        console.error('Error creating employee:', error);
+        console.error("Error creating employee:", error);
         notifications.show({
           title: "Error",
           color: "red",
@@ -136,6 +134,12 @@ export default function OnboardIndex() {
             size="xs"
           />
           <TextInput
+            label="Start dato"
+            placeholder="05-02-2024"
+            {...form.getInputProps("startDate")}
+            size="xs"
+          />
+          <TextInput
             label="Job titel"
             placeholder="titel"
             {...form.getInputProps("jobtitle")}
@@ -145,6 +149,7 @@ export default function OnboardIndex() {
           <MultiSelect
             label="Afdeling"
             size="xs"
+            placeholder="Aalborg, Risskov..."
             data={[
               "Aalborg",
               "Risskov",
@@ -163,6 +168,7 @@ export default function OnboardIndex() {
           <MultiSelect
             label="Position"
             size="xs"
+            placeholder="IT,Salg..."
             data={[
               "Salg",
               "Administration",
@@ -176,6 +182,7 @@ export default function OnboardIndex() {
           />
           <MultiSelect
             label="Adgange"
+            placeholder="ADT, Bilinfo..."
             size="xs"
             data={[
               "Fiat",
@@ -189,7 +196,7 @@ export default function OnboardIndex() {
               "E-mail",
               "Bilinfo",
               "ADT",
-              "Værkstedsplanne",
+              "Værkstedsplanner",
               "Isuzu",
               "Maxus",
               "JAC",
@@ -198,13 +205,14 @@ export default function OnboardIndex() {
           />
           <MultiSelect
             label="Diverse"
+            placeholder="Visitkort..."
             size="xs"
             data={["Visitkort", "Firmabetalt telefon"]}
             {...form.getInputProps("misc")}
           />
           <TextInput
-            label="Bestemt tlf"
-            placeholder="Iphone.."
+            label="Aftalt bestemt tlf"
+            placeholder="Iphone, Samsung..."
             {...form.getInputProps("phonemodel")}
             size="xs"
           />

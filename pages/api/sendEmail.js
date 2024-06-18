@@ -4,10 +4,11 @@ const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
   secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
+  // Remove auth if no authentication is required
+  // auth: {
+  //   user: process.env.SMTP_USER,
+  //   pass: process.env.SMTP_PASS,
+  // },
 });
 
 export default async function handler(req, res) {
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
     try {
       // Send email
       await transporter.sendMail({
-        from: `"Pedersen & Nielsen" <${process.env.SMTP_USER}>`,
+        from: `"Pedersen & Nielsen" <no-reply@autohus.dk>`, // Adjust the 'from' field
         to,
         subject,
         text,

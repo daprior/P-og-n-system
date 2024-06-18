@@ -57,6 +57,11 @@ export default function Main({ children, style = "" }) {
   ];
   const userNavigation = [{ name: "Forside", href: "/" }];
 
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn'); // Clear authentication status
+    router.push('/login'); // Redirect to the login page
+  };
+
   return (
     <>
       <div>
@@ -372,10 +377,10 @@ export default function Main({ children, style = "" }) {
                           )}
                         </Menu.Item>
                       ))}
-                      {/* <Menu.Item>
+                      <Menu.Item>
                         {({ active }) => (
                           <a
-                            onClick={signoutUser}
+                            onClick={handleLogout}
                             className={classNames(
                               active ? "bg-gray-50" : "",
                               "block px-3 py-1 text-sm leading-6 text-gray-900"
@@ -384,7 +389,7 @@ export default function Main({ children, style = "" }) {
                             Log ud
                           </a>
                         )}
-                      </Menu.Item> */}
+                      </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </Menu>

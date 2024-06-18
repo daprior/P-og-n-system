@@ -12,10 +12,11 @@ import EmployeeModal from "/components/EmployeeModal";
 import EmployeeEditModal from "/components/EmployeeEditModal";
 import Main from "components/layouts/Main";
 import { notifications } from "@mantine/notifications";
+import withAuthProtection from "../../components/withAuthProtection";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
-export default function DashboardIndex() {
+function MedarbejderIndex() {
   const {
     data: employees,
     error,
@@ -191,3 +192,5 @@ export default function DashboardIndex() {
     </Main>
   );
 }
+
+export default withAuthProtection(MedarbejderIndex);

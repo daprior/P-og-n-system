@@ -59,7 +59,7 @@ export default function OnboardIndex() {
 
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk", // Replace with actual recipient email
+          to: "daniel.prior@autohus.dk, emil.penderup@autohus.dk",
           subject: "Ny medarbejder oprettet",
           text: `
             En ny medarbejder er tilføjet til Onboarding:

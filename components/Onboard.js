@@ -62,18 +62,19 @@ export default function OnboardIndex() {
           to: "daniel.prior@autohus.dk", // Replace with actual recipient email
           subject: "New Employee Created",
           text: `
-            A new employee has been created:
+            En ny medarbejder er tilføjet til Onboarding:
 
-            Name: ${form.values.name}
+            Oprettet af: ${form.values.createdby}
+            Medarbejderens navn: ${form.values.name}
             Email: ${form.values.email}
-            Phone: ${form.values.phone}
-            Username: ${form.values.username}
-            Job Title: ${form.values.jobtitle}
-            Department: ${form.values.department.join(", ")}
+            Telefonnummer: ${form.values.phone}
+            Brugernavn: ${form.values.username}
+            Job beskrivelse: ${form.values.jobtitle}
+            Afdeling: ${form.values.department.join(", ")}
             Position: ${form.values.position.join(", ")}
-            Accesses: ${form.values.accesses.join(", ")}
-            Misc: ${form.values.misc.join(", ")}
-            Phone Model: ${form.values.phonemodel}
+            Adgange: ${form.values.accesses.join(", ")}
+            Diverse: ${form.values.misc.join(", ")}
+            Aftalt bestemt telefon: ${form.values.phonemodel}
             Note: ${form.values.note}
           `,
         };

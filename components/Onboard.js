@@ -60,7 +60,7 @@ export default function OnboardIndex() {
         // Prepare email data with all form fields
         const emailData = {
           to: "daniel.prior@autohus.dk", // Replace with actual recipient email
-          subject: "New Employee Created",
+          subject: "Ny medarbejder oprettet",
           text: `
             En ny medarbejder er tilføjet til Onboarding:
 
@@ -76,6 +76,8 @@ export default function OnboardIndex() {
             Diverse: ${form.values.misc.join(", ")}
             Aftalt bestemt telefon: ${form.values.phonemodel}
             Note: ${form.values.note}
+
+            Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
         };
 

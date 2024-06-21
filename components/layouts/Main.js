@@ -22,6 +22,7 @@ import {
   IoDocumentAttachSharp,
   IoDocumentOutline,
   IoPhonePortraitOutline,
+  IoSettingsOutline,
 } from "react-icons/io5";
 
 function classNames(...classes) {
@@ -45,6 +46,7 @@ export default function Main({ children, style = "" }) {
     //   icon: IoPhonePortraitOutline,
     // },
     { name: "Tjekliste", href: `/user/checklist`, icon: IoDocumentOutline },
+    { name: "Indstillinger", href: `/user/settings`, icon: IoSettingsOutline },
   ];
 
   const teams = [

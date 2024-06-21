@@ -38,10 +38,10 @@ export default function Index() {
             </h2>
             <Button
               size="md"
-              className="bg-black"
+              className="bg-blue-500"
               onClick={() => setModalOpened(true)}
             >
-              Åben tjekliste
+              Tjekliste til onboarding
             </Button>
           </div>
 

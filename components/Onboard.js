@@ -38,13 +38,6 @@ export default function OnboardIndex() {
 
   const sendEmail = async (emailData) => {
     try {
-      // Fetch email recipients from settings
-      const settingsResponse = await axios.get("/api/settings");
-      const emailRecipients = settingsResponse.data.emailRecipients;
-  
-      // Update emailData to use the recipients from settings
-      emailData.to = emailRecipients.join(", ");
-  
       const response = await axios.post("/api/sendEmail", emailData);
       console.log("Email sent:", response.data);
     } catch (error) {
@@ -52,8 +45,7 @@ export default function OnboardIndex() {
       throw error;
     }
   };
-  
-  // When preparing email data in handleConfirmation function
+
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
       try {
@@ -64,13 +56,14 @@ export default function OnboardIndex() {
           color: "green",
           message: "Employee has been created successfully.",
         });
-  
+
         // Prepare email data with all form fields
         const emailData = {
+          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk",
           subject: "Ny medarbejder oprettet",
           text: `
             En ny medarbejder er tilføjet til Onboarding:
-  
+
             Oprettet af: ${form.values.createdby}
             Medarbejderens navn: ${form.values.name}
             Email: ${form.values.email}
@@ -83,11 +76,11 @@ export default function OnboardIndex() {
             Diverse: ${form.values.misc.join(", ")}
             Aftalt bestemt telefon: ${form.values.phonemodel}
             Note: ${form.values.note}
-  
+
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
         };
-  
+
         // Call sendEmail function to notify about employee creation
         await sendEmail(emailData);
         console.log("Email sent successfully");

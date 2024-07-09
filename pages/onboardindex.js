@@ -2,6 +2,7 @@ import { Button, Modal, Group } from "@mantine/core";
 import Link from "next/link";
 import { useState } from "react";
 import Onboard from "components/Onboard";
+import { IoChevronBack } from "react-icons/io5";
 
 export default function Index() {
   const [modalOpened, setModalOpened] = useState(false);
@@ -33,32 +34,22 @@ export default function Index() {
 
         <div className="pt-10 pr-20 pl-20 pb-20 shadow-xl mt-10 rounded-lg bg-white">
           <div className="flex justify-between mb-5">
+            <Button component="a" href="/" className="bg-black">
+              <IoChevronBack /> Tilbage
+            </Button>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Vælg boarding
+              Opret medarbejder
             </h2>
+            <Button
+              size="md"
+              className="bg-blue-500"
+              onClick={() => setModalOpened(true)}
+            >
+              Tjekliste til onboarding
+            </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-4">
-            <Link href="/onboardindex">
-              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-black hover:bg-[#EFF5F9] hover:cursor-pointer">
-                <h2 className="text-xl font-bold mx-auto text-center">
-                  Gå til onboarding
-                </h2>
-                <p className="mx-auto text-center mt-4">
-                  Vælg denne, hvis du skal registrere en ny medarbejder
-                </p>
-              </div>
-            </Link>
-            <Link href="/offboardindex">
-              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-black hover:bg-[#EFF5F9] hover:cursor-pointer">
-                <h2 className="text-xl font-bold mx-auto text-center">
-                  Gå til offboarding
-                </h2>
-                <p className="mx-auto text-center mt-4">
-                  Vælg denne, hvis en medarbejder stopper
-                </p>
-              </div>
-            </Link>
-          </div>
+
+          <Onboard />
         </div>
 
         {/* Buttons in the right corner */}
@@ -71,6 +62,36 @@ export default function Index() {
             </Link>
           </Group>
         </div>
+
+        {/* Empty Mantine Modal */}
+        <Modal
+          opened={modalOpened}
+          onClose={() => setModalOpened(false)}
+          title="Tjekliste"
+          size="70%"
+        >
+          <div>
+            {/* <div className="font-bold mb-4">
+              <h3>Tjekliste</h3>
+            </div> */}
+            <div className="mb-5">
+              <Button onClick={downloadPdf} className="bg-black mb-2">
+                Download PDF
+              </Button>
+              <Button
+                onClick={openPdfInNewWindow}
+                className="bg-black mb-2 ml-2"
+              >
+                Åben PDF i nyt vindue
+              </Button>
+            </div>
+            <iframe
+              title="PDF Viewer"
+              style={{ width: "100%", height: "800px" }} // Adjust dimensions as needed
+              src={pdfUrl}
+            />
+          </div>
+        </Modal>
       </div>
     </>
   );

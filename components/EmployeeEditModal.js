@@ -23,7 +23,6 @@ export default function EmployeeEditModal({
       name: "",
       phone: "",
       email: "",
-      username: "",
       jobtitle: "",
       note: "",
       department: [],
@@ -42,7 +41,6 @@ export default function EmployeeEditModal({
         name: selectedEmployee.name || "",
         phone: selectedEmployee.phone || "",
         email: selectedEmployee.email || "",
-        username: selectedEmployee.username || "",
         jobtitle: selectedEmployee.jobtitle || "",
         note: selectedEmployee.note || "",
         department: selectedEmployee.department
@@ -111,12 +109,6 @@ export default function EmployeeEditModal({
           label="Email"
           placeholder="Medarbejder email"
           {...form.getInputProps("email")}
-          size="xs"
-        />
-        <TextInput
-          label="Brugernavn"
-          placeholder="brugernavn"
-          {...form.getInputProps("username")}
           size="xs"
         />
         <TextInput

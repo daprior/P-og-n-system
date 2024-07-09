@@ -21,10 +21,6 @@ const EmployeeModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     jobtitle: {
       type: DataTypes.STRING,
       allowNull: true,

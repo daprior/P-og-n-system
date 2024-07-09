@@ -19,7 +19,6 @@ export default function OnboardIndex() {
       name: "",
       phone: "",
       email: "",
-      username: "",
       jobtitle: "",
       note: "",
       department: [],
@@ -68,7 +67,6 @@ export default function OnboardIndex() {
             Medarbejderens navn: ${form.values.name}
             Email: ${form.values.email}
             Telefonnummer: ${form.values.phone}
-            Brugernavn: ${form.values.username}
             Job beskrivelse: ${form.values.jobtitle}
             Afdeling: ${form.values.department.join(", ")}
             Position: ${form.values.position.join(", ")}
@@ -126,12 +124,6 @@ export default function OnboardIndex() {
             label="Email"
             placeholder="Email"
             {...form.getInputProps("email")}
-            size="xs"
-          />
-          <TextInput
-            label="Brugernavn"
-            placeholder="brugernavn"
-            {...form.getInputProps("username")}
             size="xs"
           />
           <TextInput

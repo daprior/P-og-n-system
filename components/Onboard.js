@@ -26,6 +26,7 @@ export default function OnboardIndex() {
       accesses: [],
       misc: [],
       phonemodel: "",
+      employmentdate: "",
     },
   });
 
@@ -74,6 +75,7 @@ export default function OnboardIndex() {
             Diverse: ${form.values.misc.join(", ")}
             Aftalt bestemt telefon: ${form.values.phonemodel}
             Note: ${form.values.note}
+            employmentdate: ${form.values.employmentdate}
 
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
@@ -201,6 +203,12 @@ export default function OnboardIndex() {
             label="Aftalt bestemt tlf"
             placeholder="Iphone, Samsung..."
             {...form.getInputProps("phonemodel")}
+            size="xs"
+          />
+          <TextInput
+            label="Ansættelsesdato"
+            placeholder="test..."
+            {...form.getInputProps("employmentdate")}
             size="xs"
           />
         </div>

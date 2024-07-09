@@ -49,10 +49,6 @@ const EmployeeModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    employmentdate: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
   },
   {
     timestamps: true,

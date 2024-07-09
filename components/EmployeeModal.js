@@ -47,10 +47,6 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
           {selectedEmployee && selectedEmployee.department}
         </p>
         <p>
-          <span className="font-bold">Brugernavn:</span>{" "}
-          {selectedEmployee && selectedEmployee.employmentdate}
-        </p>
-        <p>
           <span className="font-bold">Position:</span>{" "}
           {selectedEmployee && selectedEmployee.position}
         </p>

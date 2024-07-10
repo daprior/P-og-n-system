@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
 import axios from "axios";
-import { TextInput, Table, Loader, Modal, Group, Button} from "@mantine/core";
+import { TextInput, Table, Loader, Modal, Group, Button } from "@mantine/core";
 import {
   IoPencilOutline,
   IoSearchOutline,
@@ -77,6 +77,32 @@ function MedarbejderIndex() {
     setSelectedEmployee(null);
   };
 
+  const getStatusStyles = (status) => {
+    switch (status) {
+      case "færdig":
+        return {
+          backgroundColor: "green",
+          color: "white",
+          padding: "0.2em 0.5em",
+          borderRadius: "8px",
+        };
+      case "under udvikling":
+        return {
+          backgroundColor: "lightblue",
+          color: "black",
+          padding: "0.2em 0.5em",
+          borderRadius: "8px",
+        };
+      default:
+        return {
+          backgroundColor: "gray",
+          color: "white",
+          padding: "0.2em 0.5em",
+          borderRadius: "8px",
+        };
+    }
+  };
+
   const rows = isValidating ? (
     <Table.Tr>
       <Table.Td colSpan="6" className="text-center">
@@ -96,9 +122,14 @@ function MedarbejderIndex() {
       )
       .map((employee) => (
         <Table.Tr key={employee?.name}>
-          <Table.Td>{employee.id}</Table.Td>
           <Table.Td>
-            {employee.createdAt &&
+            <span style={getStatusStyles(employee?.status)}>
+              {employee?.status}
+            </span>
+          </Table.Td>
+          <Table.Td>{employee?.id}</Table.Td>
+          <Table.Td>
+            {employee?.createdAt &&
               new Date(employee?.createdAt).toLocaleDateString("da-DK")}
           </Table.Td>
           <Table.Td>{employee?.name}</Table.Td>
@@ -140,6 +171,7 @@ function MedarbejderIndex() {
         <Table>
           <Table.Thead>
             <Table.Tr>
+              <Table.Th>Status</Table.Th>
               <Table.Th>Id</Table.Th>
               <Table.Th>Oprettet</Table.Th>
               <Table.Th>Navn</Table.Th>

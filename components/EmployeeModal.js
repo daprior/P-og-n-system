@@ -31,7 +31,7 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Telefon:</span>{" "}
-          {selectedEmployee && selectedEmployee?.phone && selectedEmployee?.phone.join(", ")}
+          {selectedEmployee && selectedEmployee?.phone && selectedEmployee?.phone}
         </p>
         <p>
           <span className="font-bold">Email:</span>{" "}

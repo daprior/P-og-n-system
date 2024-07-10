@@ -69,17 +69,18 @@ export default function OnboardIndex() {
 
             Oprettet af: ${form.values.createdby}
             Medarbejderens navn: ${form.values.name}
-            Email: ${form.values.email.join(", ")}
-            Telefon: ${form.values.phone.join(", ")}
-            Beskatning af fri tlf: ${form.values.phonemodel.join(", ")}
+            Email: ${form.values.email}
+            Telefon: ${form.values.phone.}
+            Beskatning af fri tlf: ${form.values.phonemodel}
             Note til telefon: ${form.values.phonenote}
             Job beskrivelse: ${form.values.jobtitle}
-            Afdeling: ${form.values.department.join(", ")}
-            Visitkort: ${form.values.card.join(", ")}
+            Afdeling: ${form.values.department}
+            Visitkort: ${form.values.card}
             Andet hardware note: ${form.values.other}
-            Adgange: ${form.values.accesses.join(", ")}
+            Adgange: ${form.values.accesses}
             Note: ${form.values.note}
             Ansættelsesdato: ${form.values.employmentdate}
+            Status: ${form.values.status}
 
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,

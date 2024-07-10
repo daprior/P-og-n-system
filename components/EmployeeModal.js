@@ -59,11 +59,11 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Afdeling:</span>{" "}
-          {selectedEmployee && selectedEmployee?.department && selectedEmployee?.department.join(", ")}
+          {selectedEmployee && selectedEmployee?.department && selectedEmployee?.department}
         </p>
         <p>
           <span className="font-bold">Adgange:</span>{" "}
-          {selectedEmployee && selectedEmployee?.accesses && selectedEmployee?.accesses.join(", ")}
+          {selectedEmployee && selectedEmployee?.accesses && selectedEmployee?.accesses}
         </p>
         <p>
           <span className="font-bold">Andet hardware:</span>{" "}

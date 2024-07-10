@@ -35,7 +35,7 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Email:</span>{" "}
-          {selectedEmployee && selectedEmployee?.email && selectedEmployee?.email.join(", ")}
+          {selectedEmployee && selectedEmployee?.email && selectedEmployee?.email}
         </p>
         <p>
           <span className="font-bold">Job titel:</span>{" "}
@@ -47,7 +47,7 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Beskatning af fri telefon:</span>{" "}
-          {selectedEmployee && selectedEmployee?.paidphone && selectedEmployee?.paidphone.join(", ")}
+          {selectedEmployee && selectedEmployee?.paidphone && selectedEmployee?.paidphone}
         </p>
         <p>
           <span className="font-bold">Note til telefon:</span>{" "}
@@ -55,7 +55,7 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Visitkort:</span>{" "}
-          {selectedEmployee && selectedEmployee?.card && selectedEmployee?.card.join(", ")}
+          {selectedEmployee && selectedEmployee?.card && selectedEmployee?.card}
         </p>
         <p>
           <span className="font-bold">Afdeling:</span>{" "}
@@ -71,7 +71,7 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
         <p>
           <span className="font-bold">Status:</span>{" "}
-          {selectedEmployee && selectedEmployee?.status && selectedEmployee?.status.join(", ")}
+          {selectedEmployee && selectedEmployee?.status && selectedEmployee?.status}
         </p>
         <p>
           <span className="font-bold">Note:</span>{" "}

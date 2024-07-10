@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     try {
       // Send email
       await transporter.sendMail({
-        from: `"Pedersen & Nielsen" <no-reply@autohus.dk>`, // Adjust the 'from' field
+        from: `"Onboarding Pedersen & Nielsen" <no-reply@autohus.dk>`, // Adjust the 'from' field
         to,
         subject,
         text,

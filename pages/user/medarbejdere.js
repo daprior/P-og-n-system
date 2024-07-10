@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
 import axios from "axios";
-import { TextInput, Table, Loader, Modal, Group, Button } from "@mantine/core";
+import { TextInput, Table, Loader, Modal, Group, Button} from "@mantine/core";
 import {
   IoPencilOutline,
   IoSearchOutline,

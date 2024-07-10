@@ -25,13 +25,15 @@ export default function EmployeeEditModal({
       phone: [],
       email: [],
       jobtitle: "",
-      note: "",
-      department: [],
-      position: [],
-      accesses: [],
-      misc: [],
-      phonemodel: "",
       employmentdate: "",
+      paidphone: [],
+      phonenote: "",
+      card: [],
+      department: [],
+      accesses: [],
+      other: "",
+      status: [],
+      note: "",
     },
   });
 
@@ -40,25 +42,26 @@ export default function EmployeeEditModal({
       form.setValues({
         createdby: selectedEmployee.createdby || "",
         name: selectedEmployee.name || "",
-
-        email: selectedEmployee.email ? JSON.parse(selectedEmployee.email) : [],
-
         phone: selectedEmployee.phone ? JSON.parse(selectedEmployee.phone) : [],
-
-        employmentdate: selectedEmployee.employmentdate || "",
+        email: selectedEmployee.email ? JSON.parse(selectedEmployee.email) : [],
         jobtitle: selectedEmployee.jobtitle || "",
-        note: selectedEmployee.note || "",
+        employmentdate: selectedEmployee.employmentdate || "",
+        paidphone: selectedEmployee.paidphone
+          ? JSON.parse(selectedEmployee.paidphone)
+          : [],
+        phonenote: selectedEmployee.phonenote || "",
+        card: selectedEmployee.card ? JSON.parse(selectedEmployee.card) : [],
+
         department: selectedEmployee.department
           ? JSON.parse(selectedEmployee.department)
           : [],
-        position: selectedEmployee.position
-          ? JSON.parse(selectedEmployee.position)
-          : [],
+
         accesses: selectedEmployee.accesses
           ? JSON.parse(selectedEmployee.accesses)
           : [],
-        misc: selectedEmployee.misc ? JSON.parse(selectedEmployee.misc) : [],
-        phonemodel: selectedEmployee.phonemodel || "",
+        other: selectedEmployee.other || "",
+        status: selectedEmployee.status ? JSON.parse(selectedEmployee.status) : [],
+        note: selectedEmployee.note || "",
       });
     }
   }, [selectedEmployee, form.setValues]);
@@ -94,115 +97,126 @@ export default function EmployeeEditModal({
       <form onSubmit={form.onSubmit(handleUpdate)}>
         <TextInput
           label="Oprettet af"
+          className="mb-4"
           placeholder="Navn"
           {...form.getInputProps("createdby")}
           size="xs"
         />
-        <TextInput
-          label="Navn"
-          placeholder="Medarbejder navn"
-          {...form.getInputProps("name")}
-          size="xs"
-        />
+        <div className="grid gap-4 md:grid-cols-2">
+          <TextInput
+            label="Navn"
+            placeholder="Medarbejder navn"
+            {...form.getInputProps("name")}
+            size="xs"
+          />
+          <Select
+            label="Telefonnummer"
+            placeholder="Ja / nej"
+            {...form.getInputProps("phone")}
+            data={["Ja", "Nej"]}
+            size="xs"
+          />
+          <Select
+            label="Email"
+            placeholder="Ja / nej"
+            {...form.getInputProps("email")}
+            data={["Ja", "Nej"]}
+            size="xs"
+          />
+          <TextInput
+            label="Job titel"
+            placeholder="titel"
+            {...form.getInputProps("jobtitle")}
+            size="xs"
+          />
+          <TextInput
+            label="Ansættelsesdato"
+            placeholder="02-03-2024"
+            {...form.getInputProps("employmentdate")}
+            size="xs"
+          />
+          <Select
+            label="Beskatning af fri telefon"
+            placeholder=""
+            {...form.getInputProps("paidphone")}
+            data={["Ja", "Nej"]}
+            size="xs"
+          />
+          <TextInput
+            label="Note til telefon"
+            placeholder="F.eks. hvis der er aftalt bestemt tlf."
+            {...form.getInputProps("phonenote")}
+            size="xs"
+          />
 
-        <Select
-          label="Telefonnummer"
-          placeholder="Medarbejder telefonnummer"
-          {...form.getInputProps("phone")}
-          data={["Ja", "Nej"]}
-          size="xs"
-        />
-        <Select
-          label="Email"
-          placeholder="Email"
-          {...form.getInputProps("email")}
-          data={["Ja", "Nej"]}
-          size="xs"
-        />
+          <Select
+            label="Visitkort"
+            placeholder=""
+            {...form.getInputProps("card")}
+            data={["Ja", "Nej"]}
+            size="xs"
+          />
 
-        <TextInput
-          label="Job titel"
-          placeholder="titel"
-          {...form.getInputProps("jobtitle")}
-          size="xs"
-        />
+          <Select
+            label="Status på onboarding"
+            placeholder=""
+            {...form.getInputProps("status")}
+            data={["under udvikling", "færdig"]}
+            size="xs"
+          />
 
-        <MultiSelect
-          label="Afdeling"
-          size="xs"
-          data={[
-            "Aalborg",
-            "Risskov",
-            "Randers",
-            "Grenaa",
-            "Auning",
-            "Frederikshavn",
-            "Hadsund",
-            "Sønderborg",
-            "Aabenraa",
-            "Hjørring",
-          ]}
-          {...form.getInputProps("department")}
-        />
-        <MultiSelect
-          label="Position"
-          size="xs"
-          data={[
-            "Salg",
-            "Administration",
-            "Lager",
-            "Værksted",
-            "Klargøring",
-            "IT",
-            "Andet",
-          ]}
-          {...form.getInputProps("position")}
-        />
-        <MultiSelect
-          label="Adgange"
-          size="xs"
-          data={[
-            "Fiat",
-            "Ford",
-            "Kia",
-            "Mazda",
-            "Renault",
-            "Volvo",
-            "Dracar",
-            "DocuBizz",
-            "E-mail",
-            "Bilinfo",
-            "ADT",
-            "Værkstedsplanne",
-            "Isuzu",
-            "Maxus",
-            "JAC",
-          ]}
-          {...form.getInputProps("accesses")}
-        />
-        <MultiSelect
-          label="Diverse"
-          size="xs"
-          data={["Visitkort", "Firmabetalt telefon"]}
-          {...form.getInputProps("misc")}
-        />
-        <TextInput
-          label="Ansættelsesdato"
-          placeholder="02-03-2024"
-          {...form.getInputProps("employmentdate")}
-          size="xs"
-        />
+          <MultiSelect
+            label="Afdeling"
+            size="xs"
+            placeholder="Aalborg, Risskov..."
+            data={[
+              "Aalborg",
+              "Risskov",
+              "Randers",
+              "Grenaa",
+              "Auning",
+              "Frederikshavn",
+              "Hadsund",
+              "Sønderborg",
+              "Aabenraa",
+              "Hjørring",
+            ]}
+            {...form.getInputProps("department")}
+          />
 
+          <MultiSelect
+            label="Adgange"
+            placeholder="ADT, Bilinfo..."
+            size="xs"
+            data={[
+              "Ford",
+              "Kia",
+              "Mazda",
+              "Renault",
+              "Volvo",
+              "Maxus",
+              "Isuzu",
+              "JAC",
+              "Dracar",
+              "DocuBizz",
+              "Bilinfo",
+              "ADT",
+              "Værkstedsplanner",
+            ]}
+            {...form.getInputProps("accesses")}
+          />
+          <TextInput
+            label="Andet hardware ønskes"
+            placeholder="Eks. mus, tastatur, skærm etc."
+            {...form.getInputProps("other")}
+            size="xs"
+          />
+        </div>
         <Textarea
-          label="Note"
-          placeholder="Medarbejder note"
+          label="Evt. noter"
+          className="mt-4"
+          placeholder="Note"
           {...form.getInputProps("note")}
-          size="xs"
-        />
-        <TextInput
-          label="Aftalt telefon model"
-          placeholder="Model"
-          {...form.getInputProps("phonemodel")}
           size="xs"
         />
 

@@ -25,19 +25,23 @@ const EmployeeModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    note: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     employmentdate: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    department: {
+    paidphone: {
       type: DataTypes.JSON,
       allowNull: true,
     },
-    position: {
+    phonenote: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    card: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
+    department: {
       type: DataTypes.JSON,
       allowNull: true,
     },
@@ -45,14 +49,21 @@ const EmployeeModel = sequelize.define(
       type: DataTypes.JSON,
       allowNull: true,
     },
-    misc: {
-      type: DataTypes.JSON,
-      allowNull: true,
-    },
-    phonemodel: {
+    other: {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    status: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
+    note: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    
+
+    
   },
   {
     timestamps: true,

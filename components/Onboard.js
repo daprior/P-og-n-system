@@ -21,13 +21,15 @@ export default function OnboardIndex() {
       phone: [],
       email: [],
       jobtitle: "",
-      note: "",
       employmentdate: "",
+      paidphone: [],
+      phonenote: "",
+      card: [],
       department: [],
-      position: [],
       accesses: [],
-      misc: [],
-      phonemodel: "",
+      other: "",
+      status: [],
+      note: "",
     },
   });
 
@@ -68,13 +70,14 @@ export default function OnboardIndex() {
             Oprettet af: ${form.values.createdby}
             Medarbejderens navn: ${form.values.name}
             Email: ${form.values.email.join(", ")}
-            Telefonnummer: ${form.values.phone.join(", ")}
+            Telefon: ${form.values.phone.join(", ")}
+            Beskatning af fri tlf: ${form.values.phonemodel.join(", ")}
+            Note til telefon: ${form.values.phonenote}
             Job beskrivelse: ${form.values.jobtitle}
             Afdeling: ${form.values.department.join(", ")}
-            Position: ${form.values.position.join(", ")}
+            Visitkort: ${form.values.card.join(", ")}
+            Andet hardware note: ${form.values.other}
             Adgange: ${form.values.accesses.join(", ")}
-            Diverse: ${form.values.misc.join(", ")}
-            Aftalt bestemt telefon: ${form.values.phonemodel}
             Note: ${form.values.note}
             Ansættelsesdato: ${form.values.employmentdate}
 
@@ -119,14 +122,14 @@ export default function OnboardIndex() {
           />
           <Select
             label="Telefonnummer"
-            placeholder="Medarbejder telefonnummer"
+            placeholder="Ja / nej"
             {...form.getInputProps("phone")}
             data={["Ja", "Nej"]}
             size="xs"
           />
           <Select
             label="Email"
-            placeholder="Email"
+            placeholder="Ja / nej"
             {...form.getInputProps("email")}
             data={["Ja", "Nej"]}
             size="xs"
@@ -137,11 +140,39 @@ export default function OnboardIndex() {
             {...form.getInputProps("jobtitle")}
             size="xs"
           />
-
           <TextInput
             label="Ansættelsesdato"
             placeholder="02-03-2024"
             {...form.getInputProps("employmentdate")}
+            size="xs"
+          />
+          <Select
+            label="Beskatning af fri telefon"
+            placeholder=""
+            {...form.getInputProps("paidphone")}
+            data={["Ja", "Nej"]}
+            size="xs"
+          />
+          <TextInput
+            label="Note til telefon"
+            placeholder="F.eks. hvis der er aftalt bestemt tlf."
+            {...form.getInputProps("phonenote")}
+            size="xs"
+          />
+
+          <Select
+            label="Visitkort"
+            placeholder=""
+            {...form.getInputProps("card")}
+            data={["Ja", "Nej"]}
+            size="xs"
+          />
+
+          <Select
+            label="Status på onboarding"
+            placeholder=""
+            {...form.getInputProps("status")}
+            data={["under udvikling", "færdig"]}
             size="xs"
           />
 
@@ -165,59 +196,35 @@ export default function OnboardIndex() {
           />
 
           <MultiSelect
-            label="Position"
-            size="xs"
-            placeholder="IT,Salg..."
-            data={[
-              "Salg",
-              "Administration",
-              "Lager",
-              "Værksted",
-              "Klargøring",
-              "IT",
-              "Andet",
-            ]}
-            {...form.getInputProps("position")}
-          />
-          <MultiSelect
             label="Adgange"
             placeholder="ADT, Bilinfo..."
             size="xs"
             data={[
-              "Fiat",
               "Ford",
               "Kia",
               "Mazda",
               "Renault",
               "Volvo",
+              "Maxus",
+              "Isuzu",
+              "JAC",
               "Dracar",
               "DocuBizz",
-              "E-mail",
               "Bilinfo",
               "ADT",
               "Værkstedsplanner",
-              "Isuzu",
-              "Maxus",
-              "JAC",
             ]}
             {...form.getInputProps("accesses")}
           />
-          <MultiSelect
-            label="Diverse"
-            placeholder="Visitkort..."
-            size="xs"
-            data={["Visitkort", "Firmabetalt telefon"]}
-            {...form.getInputProps("misc")}
-          />
           <TextInput
-            label="Aftalt bestemt tlf"
-            placeholder="Iphone, Samsung..."
-            {...form.getInputProps("phonemodel")}
+            label="Andet hardware ønskes"
+            placeholder="Eks. mus, tastatur, skærm etc."
+            {...form.getInputProps("other")}
             size="xs"
           />
         </div>
         <Textarea
-          label="Note på medarbejder"
+          label="Evt. noter"
           className="mt-4"
           placeholder="Note"
           {...form.getInputProps("note")}

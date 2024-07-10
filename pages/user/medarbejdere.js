@@ -124,7 +124,7 @@ function MedarbejderIndex() {
         <Table.Tr key={employee?.name}>
           <Table.Td>
             <span style={getStatusStyles(employee?.status)}>
-              {employee?.status}
+              {JSON.parse.employee?.status}
             </span>
           </Table.Td>
           <Table.Td>{employee?.id}</Table.Td>

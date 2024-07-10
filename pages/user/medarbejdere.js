@@ -77,31 +77,7 @@ function MedarbejderIndex() {
     setSelectedEmployee(null);
   };
 
-  const getStatusStyles = (status) => {
-    switch (status) {
-      case "færdig":
-        return {
-          backgroundColor: "green",
-          color: "white",
-          padding: "0.2em 0.5em",
-          borderRadius: "8px",
-        };
-      case "under udvikling":
-        return {
-          backgroundColor: "lightblue",
-          color: "black",
-          padding: "0.2em 0.5em",
-          borderRadius: "8px",
-        };
-      default:
-        return {
-          backgroundColor: "gray",
-          color: "white",
-          padding: "0.2em 0.5em",
-          borderRadius: "8px",
-        };
-    }
-  };
+  
 
   const rows = isValidating ? (
     <Table.Tr>
@@ -122,11 +98,7 @@ function MedarbejderIndex() {
       )
       .map((employee) => (
         <Table.Tr key={employee?.name}>
-          <Table.Td>
-            <span style={getStatusStyles(employee?.status)}>
-              {JSON.parse.employee?.status}
-            </span>
-          </Table.Td>
+          <Table.Td>{employee?.status}</Table.Td>
           <Table.Td>{employee?.id}</Table.Td>
           <Table.Td>
             {employee?.createdAt &&

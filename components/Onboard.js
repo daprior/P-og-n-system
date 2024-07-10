@@ -62,7 +62,7 @@ export default function OnboardIndex() {
 
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk",
+          to: "daniel.prior@autohus.dk",
           subject: "Ny medarbejder oprettet",
           text: `
             En ny medarbejder er tilføjet til Onboarding:
@@ -149,8 +149,8 @@ export default function OnboardIndex() {
             size="xs"
           />
           <Select
-            label="Beskatning af fri telefon"
-            placeholder=""
+            label="Medarbejderen skal have betalt firmatelefon (Beskatning af fri telefon)"
+            placeholder="Ja / nej"
             {...form.getInputProps("paidphone")}
             data={["Ja", "Nej"]}
             size="xs"
@@ -164,7 +164,7 @@ export default function OnboardIndex() {
 
           <Select
             label="Visitkort"
-            placeholder=""
+            placeholder="Ja / nej"
             {...form.getInputProps("card")}
             data={["Ja", "Nej"]}
             size="xs"
@@ -172,7 +172,7 @@ export default function OnboardIndex() {
 
           <Select
             label="Status på onboarding"
-            placeholder=""
+            placeholder="Under udvikling"
             {...form.getInputProps("status")}
             data={["under udvikling", "færdig"]}
             size="xs"
@@ -198,7 +198,7 @@ export default function OnboardIndex() {
           />
 
           <MultiSelect
-            label="Adgange"
+            label="Adgange (ønskes andre adgange er det ikke under IT-afdelingen)"
             placeholder="ADT, Bilinfo..."
             size="xs"
             data={[

@@ -69,18 +69,19 @@ export default function OnboardIndex() {
 
             Oprettet af: ${form.values.createdby}
             Medarbejderens navn: ${form.values.name}
-            Email: ${form.values.email}
-            Telefon: ${form.values.phone.}
-            Beskatning af fri tlf: ${form.values.phonemodel}
+            Email: ${Array.isArray(form.values.email) ? form.values.email.join(", ") : form.values.email}
+            Telefon: ${Array.isArray(form.values.phone) ? form.values.phone.join(", ") : form.values.phone}
+            Beskatning af fri tlf: ${Array.isArray(form.values.phonemodel) ? form.values.phonemodel.join(", ") : form.values.phonemodel}
             Note til telefon: ${form.values.phonenote}
             Job beskrivelse: ${form.values.jobtitle}
-            Afdeling: ${form.values.department}
-            Visitkort: ${form.values.card}
+            Afdeling: ${Array.isArray(form.values.department) ? form.values.department.join(", ") : form.values.department}
+            Visitkort: ${Array.isArray(form.values.card) ? form.values.card.join(", ") : form.values.card}
             Andet hardware note: ${form.values.other}
-            Adgange: ${form.values.accesses}
+            Adgange: ${Array.isArray(form.values.accesses) ? form.values.accesses.join(", ") : form.values.accesses}
             Note: ${form.values.note}
             Ansættelsesdato: ${form.values.employmentdate}
-            Status: ${form.values.status}
+            Status: ${Array.isArray(form.values.status) ? form.values.status.join(", ") : form.values.status}
+
 
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,

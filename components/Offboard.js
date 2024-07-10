@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
 
+
 export default function OnboardIndex() {
   const form = useForm({
     initialValues: {
@@ -36,19 +37,35 @@ export default function OnboardIndex() {
         const emailData = {
           to: "daniel.prior@autohus.dk",
           subject: "Medarbejder skal slettes",
-          html: `
-            <p>En medarbejder skal slettes:</p>
+          text: `
+            En medarbejder skal slettes:
   
-            <p><strong>Skema udfyldt af:</strong> ${form.values.skemaudfyldtaf}</p>
-            <p><strong>Medarbejder stopper dato:</strong> ${form.values.slutdato}</p>
-            <p><strong>Medarbejder navn:</strong> ${form.values.medarbejdernavn}</p>
+            Skema udfyldt af: ${form.values.skemaudfyldtaf}
+            Medarbejder stopper dato: ${form.values.slutdato}
+            Medarbejder navn: ${form.values.medarbejdernavn}
+
+            Husk:
+            
+            Medarbejder skal have autosvar på sin mail
+            Aflevere nøgler
+            Aflevere telefon
+            Aflevere alt pc-udstyr - Retur til IT i Randers
+            Besked sendes til: Løn, IT og marketing
   
-            <p>Denne mail er automatisk genereret fra onboarding.autohus.dk</p>
+            Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
         };
-
-        // Call sendEmail function to notify about employee deletion
+  
+        // Call sendEmail function to notify about employee creation
         await sendEmail(emailData);
+        
+        // Show success notification
+        notifications.show({
+          title: "Success",
+          color: "green",
+          message: "Medarbejder sendt til sletning.",
+        });
+  
         console.log("Email sent successfully");
       } catch (error) {
         console.error("Error sending mail:", error);

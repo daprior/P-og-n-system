@@ -14,11 +14,11 @@ const EmployeeModel = sequelize.define(
       allowNull: true,
     },
     phone: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: true,
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: true,
     },
     jobtitle: {
@@ -26,6 +26,10 @@ const EmployeeModel = sequelize.define(
       allowNull: true,
     },
     note: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    employmentdate: {
       type: DataTypes.STRING,
       allowNull: true,
     },

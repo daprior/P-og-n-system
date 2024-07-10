@@ -6,6 +6,7 @@ import {
   MultiSelect,
   Modal,
   Group,
+  Select,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useState } from "react";
@@ -17,10 +18,11 @@ export default function OnboardIndex() {
     initialValues: {
       createdby: "",
       name: "",
-      phone: "",
-      email: "",
+      phone: [],
+      email: [],
       jobtitle: "",
       note: "",
+      employmentdate: "",
       department: [],
       position: [],
       accesses: [],
@@ -65,8 +67,8 @@ export default function OnboardIndex() {
 
             Oprettet af: ${form.values.createdby}
             Medarbejderens navn: ${form.values.name}
-            Email: ${form.values.email}
-            Telefonnummer: ${form.values.phone}
+            Email: ${form.values.email.join(", ")}
+            Telefonnummer: ${form.values.phone.join(", ")}
             Job beskrivelse: ${form.values.jobtitle}
             Afdeling: ${form.values.department.join(", ")}
             Position: ${form.values.position.join(", ")}
@@ -74,6 +76,7 @@ export default function OnboardIndex() {
             Diverse: ${form.values.misc.join(", ")}
             Aftalt bestemt telefon: ${form.values.phonemodel}
             Note: ${form.values.note}
+            Ansættelsesdato: ${form.values.employmentdate}
 
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
@@ -114,22 +117,31 @@ export default function OnboardIndex() {
             {...form.getInputProps("name")}
             size="xs"
           />
-          <TextInput
+          <Select
             label="Telefonnummer"
             placeholder="Medarbejder telefonnummer"
             {...form.getInputProps("phone")}
+            data={["Ja", "Nej"]}
             size="xs"
           />
-          <TextInput
+          <Select
             label="Email"
             placeholder="Email"
             {...form.getInputProps("email")}
+            data={["Ja", "Nej"]}
             size="xs"
           />
           <TextInput
             label="Job titel"
             placeholder="titel"
             {...form.getInputProps("jobtitle")}
+            size="xs"
+          />
+
+          <TextInput
+            label="Ansættelsesdato"
+            placeholder="02-03-2024"
+            {...form.getInputProps("employmentdate")}
             size="xs"
           />
 

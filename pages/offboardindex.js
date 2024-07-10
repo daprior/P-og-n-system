@@ -5,27 +5,6 @@ import Offboard from "components/Offboard";
 import { IoChevronBack } from "react-icons/io5";
 
 export default function Index() {
-  const [modalOpened, setModalOpened] = useState(false);
-  const pdfUrl = "/Tjekliste-til-onboarding.pdf"; // Replace with the actual filename
-
-  const downloadPdf = () => {
-    // Create a temporary anchor element
-    const anchorElement = document.createElement("a");
-    anchorElement.href = pdfUrl;
-    anchorElement.download = "Tjekliste-til-onboarding.pdf"; // Specify the filename for download
-    document.body.appendChild(anchorElement);
-
-    // Trigger a click event to start the download
-    anchorElement.click();
-
-    // Cleanup: remove the temporary anchor element
-    document.body.removeChild(anchorElement);
-  };
-
-  const openPdfInNewWindow = () => {
-    // Open the PDF URL in a new window/tab
-    window.open(pdfUrl, "_blank");
-  };
 
   return (
     <>
@@ -38,17 +17,10 @@ export default function Index() {
             component="a"
             href="/"
             className="bg-black"><IoChevronBack/> Tilbage</Button>
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          </div>
+            <h2 className="mt-4 mb-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Medarbejder stopper
             </h2>
-            <Button
-              size="md"
-              className="bg-blue-500"
-              onClick={() => setModalOpened(true)}
-            >
-              Tjekliste til offboarding
-            </Button>
-          </div>
 
           <Offboard />
         </div>
@@ -64,35 +36,7 @@ export default function Index() {
           </Group>
         </div>
 
-        {/* Empty Mantine Modal */}
-        <Modal
-          opened={modalOpened}
-          onClose={() => setModalOpened(false)}
-          title="Tjekliste"
-          size="70%"
-        >
-          <div>
-            {/* <div className="font-bold mb-4">
-              <h3>Tjekliste</h3>
-            </div> */}
-            <div className="mb-5">
-              <Button onClick={downloadPdf} className="bg-black mb-2">
-                Download PDF
-              </Button>
-              <Button
-                onClick={openPdfInNewWindow}
-                className="bg-black mb-2 ml-2"
-              >
-                Åben PDF i nyt vindue
-              </Button>
-            </div>
-            <iframe
-              title="PDF Viewer"
-              style={{ width: "100%", height: "800px" }} // Adjust dimensions as needed
-              src={pdfUrl}
-            />
-          </div>
-        </Modal>
+   
       </div>
     </>
   );

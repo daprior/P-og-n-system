@@ -43,6 +43,11 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
         </p>
 
         <p>
+          <span className="font-bold">Ansættelsesdato:</span>{" "}
+          {selectedEmployee && selectedEmployee.employmentdate}
+        </p>
+
+        <p>
           <span className="font-bold">Afdeling:</span>{" "}
           {selectedEmployee && selectedEmployee.department}
         </p>

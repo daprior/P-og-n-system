@@ -21,8 +21,8 @@ export default function EmployeeEditModal({
     initialValues: {
       createdby: "",
       name: "",
-      phone: "",
-      email: "",
+      phone: [],
+      email: [],
       jobtitle: "",
       note: "",
       department: [],
@@ -30,7 +30,7 @@ export default function EmployeeEditModal({
       accesses: [],
       misc: [],
       phonemodel: "",
-
+      employmentdate: "",
     },
   });
 
@@ -39,8 +39,12 @@ export default function EmployeeEditModal({
       form.setValues({
         createdby: selectedEmployee.createdby || "",
         name: selectedEmployee.name || "",
-        phone: selectedEmployee.phone || "",
-        email: selectedEmployee.email || "",
+
+        email: selectedEmployee.email ? JSON.parse(selectedEmployee.email) : [],
+
+        phone: selectedEmployee.phone ? JSON.parse(selectedEmployee.phone) : [],
+
+        employmentdate: selectedEmployee.employmentdate || "",
         jobtitle: selectedEmployee.jobtitle || "",
         note: selectedEmployee.note || "",
         department: selectedEmployee.department
@@ -99,18 +103,22 @@ export default function EmployeeEditModal({
           {...form.getInputProps("name")}
           size="xs"
         />
-        <TextInput
+
+        <Select
           label="Telefonnummer"
           placeholder="Medarbejder telefonnummer"
           {...form.getInputProps("phone")}
+          data={["Ja", "Nej"]}
           size="xs"
         />
-        <TextInput
+        <Select
           label="Email"
-          placeholder="Medarbejder email"
+          placeholder="Email"
           {...form.getInputProps("email")}
+          data={["Ja", "Nej"]}
           size="xs"
         />
+
         <TextInput
           label="Job titel"
           placeholder="titel"
@@ -176,6 +184,12 @@ export default function EmployeeEditModal({
           size="xs"
           data={["Visitkort", "Firmabetalt telefon"]}
           {...form.getInputProps("misc")}
+        />
+        <TextInput
+          label="Ansættelsesdato"
+          placeholder="02-03-2024"
+          {...form.getInputProps("employmentdate")}
+          size="xs"
         />
 
         <Textarea

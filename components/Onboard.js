@@ -121,7 +121,7 @@ export default function OnboardIndex() {
             size="xs"
           />
           <Select
-            label="Telefonnummer"
+            label="Telefon"
             placeholder="Ja / nej"
             {...form.getInputProps("phone")}
             data={["Ja", "Nej"]}

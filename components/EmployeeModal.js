@@ -17,65 +17,65 @@ export default function EmployeeModal({ opened, onClose, selectedEmployee }) {
       <div className="space-y-4">
         <p>
           <span className="font-bold">Oprettet af:</span>{" "}
-          {selectedEmployee && selectedEmployee.createdby}
+          {selectedEmployee && selectedEmployee?.createdby}
         </p>
         <p>
           <span className="font-bold">Oprettet:</span>{" "}
           {selectedEmployee &&
-            selectedEmployee.createdAt &&
-            new Date(selectedEmployee.createdAt).toLocaleDateString("da-DK")}
+            selectedEmployee?.createdAt &&
+            new Date(selectedEmployee?.createdAt).toLocaleDateString("da-DK")}
         </p>
         <p>
           <span className="font-bold">Navn:</span>{" "}
-          {selectedEmployee && selectedEmployee.name}
+          {selectedEmployee && selectedEmployee?.name}
         </p>
         <p>
           <span className="font-bold">Telefon:</span>{" "}
-          {selectedEmployee && selectedEmployee.phone && selectedEmployee.phone.join(", ")}
+          {selectedEmployee && selectedEmployee?.phone && selectedEmployee?.phone.join(", ")}
         </p>
         <p>
           <span className="font-bold">Email:</span>{" "}
-          {selectedEmployee && selectedEmployee.email && selectedEmployee.email.join(", ")}
+          {selectedEmployee && selectedEmployee?.email && selectedEmployee?.email.join(", ")}
         </p>
         <p>
           <span className="font-bold">Job titel:</span>{" "}
-          {selectedEmployee && selectedEmployee.jobtitle}
+          {selectedEmployee && selectedEmployee?.jobtitle}
         </p>
         <p>
           <span className="font-bold">Ansættelsesdato:</span>{" "}
-          {selectedEmployee && selectedEmployee.employmentdate}
+          {selectedEmployee && selectedEmployee?.employmentdate}
         </p>
         <p>
           <span className="font-bold">Beskatning af fri telefon:</span>{" "}
-          {selectedEmployee && selectedEmployee.paidphone && selectedEmployee.paidphone.join(", ")}
+          {selectedEmployee && selectedEmployee?.paidphone && selectedEmployee?.paidphone.join(", ")}
         </p>
         <p>
           <span className="font-bold">Note til telefon:</span>{" "}
-          {selectedEmployee && selectedEmployee.phonenote}
+          {selectedEmployee && selectedEmployee?.phonenote}
         </p>
         <p>
           <span className="font-bold">Visitkort:</span>{" "}
-          {selectedEmployee && selectedEmployee.card && selectedEmployee.card.join(", ")}
+          {selectedEmployee && selectedEmployee?.card && selectedEmployee?.card.join(", ")}
         </p>
         <p>
           <span className="font-bold">Afdeling:</span>{" "}
-          {selectedEmployee && selectedEmployee.department && selectedEmployee.department.join(", ")}
+          {selectedEmployee && selectedEmployee?.department && selectedEmployee?.department.join(", ")}
         </p>
         <p>
           <span className="font-bold">Adgange:</span>{" "}
-          {selectedEmployee && selectedEmployee.accesses && selectedEmployee.accesses.join(", ")}
+          {selectedEmployee && selectedEmployee?.accesses && selectedEmployee?.accesses.join(", ")}
         </p>
         <p>
           <span className="font-bold">Andet hardware:</span>{" "}
-          {selectedEmployee && selectedEmployee.other}
+          {selectedEmployee && selectedEmployee?.other}
         </p>
         <p>
           <span className="font-bold">Status:</span>{" "}
-          {selectedEmployee && selectedEmployee.status && selectedEmployee.status.value}
+          {selectedEmployee && selectedEmployee?.status && selectedEmployee?.status.join(", ")}
         </p>
         <p>
           <span className="font-bold">Note:</span>{" "}
-          {selectedEmployee && selectedEmployee.note}
+          {selectedEmployee && selectedEmployee?.note}
         </p>
       </div>
     </Modal>

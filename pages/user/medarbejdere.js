@@ -95,15 +95,15 @@ function MedarbejderIndex() {
         employee.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
       .map((employee) => (
-        <Table.Tr key={employee.name}>
+        <Table.Tr key={employee?.name}>
           <Table.Td>{employee.id}</Table.Td>
           <Table.Td>
             {employee.createdAt &&
-              new Date(employee.createdAt).toLocaleDateString("da-DK")}
+              new Date(employee?.createdAt).toLocaleDateString("da-DK")}
           </Table.Td>
-          <Table.Td>{employee.name}</Table.Td>
-          <Table.Td>{employee.phone}</Table.Td>
-          <Table.Td>{employee.createdby}</Table.Td>
+          <Table.Td>{employee?.name}</Table.Td>
+          <Table.Td>{employee?.phone}</Table.Td>
+          <Table.Td>{employee?.createdby}</Table.Td>
           <Table.Td>
             <div className="flex gap-4">
               <IoSearchOutline

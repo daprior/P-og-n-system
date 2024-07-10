@@ -40,28 +40,28 @@ export default function EmployeeEditModal({
   useEffect(() => {
     if (selectedEmployee) {
       form.setValues({
-        createdby: selectedEmployee.createdby || "",
-        name: selectedEmployee.name || "",
-        phone: selectedEmployee.phone ? JSON.parse(selectedEmployee.phone) : [],
-        email: selectedEmployee.email ? JSON.parse(selectedEmployee.email) : [],
-        jobtitle: selectedEmployee.jobtitle || "",
-        employmentdate: selectedEmployee.employmentdate || "",
-        paidphone: selectedEmployee.paidphone
-          ? JSON.parse(selectedEmployee.paidphone)
+        createdby: selectedEmployee?.createdby || "",
+        name: selectedEmployee?.name || "",
+        phone: selectedEmployee?.phone ? JSON.parse(selectedEmployee?.phone) : [],
+        email: selectedEmployee?.email ? JSON.parse(selectedEmployee?.email) : [],
+        jobtitle: selectedEmployee?.jobtitle || "",
+        employmentdate: selectedEmployee?.employmentdate || "",
+        paidphone: selectedEmployee?.paidphone
+          ? JSON.parse(selectedEmployee?.paidphone)
           : [],
-        phonenote: selectedEmployee.phonenote || "",
-        card: selectedEmployee.card ? JSON.parse(selectedEmployee.card) : [],
+        phonenote: selectedEmployee?.phonenote || "",
+        card: selectedEmployee?.card ? JSON.parse(selectedEmployee?.card) : [],
 
-        department: selectedEmployee.department
-          ? JSON.parse(selectedEmployee.department)
+        department: selectedEmployee?.department
+          ? JSON.parse(selectedEmployee?.department)
           : [],
 
-        accesses: selectedEmployee.accesses
-          ? JSON.parse(selectedEmployee.accesses)
+        accesses: selectedEmployee?.accesses
+          ? JSON.parse(selectedEmployee?.accesses)
           : [],
         other: selectedEmployee.other || "",
-        status: selectedEmployee.status ? JSON.parse(selectedEmployee.status) : [],
-        note: selectedEmployee.note || "",
+        status: selectedEmployee.status ? JSON.parse(selectedEmployee?.status) : [],
+        note: selectedEmployee?.note || "",
       });
     }
   }, [selectedEmployee, form.setValues]);

@@ -5,6 +5,7 @@ import {
   MultiSelect,
   Checkbox,
   Group,
+  Select,
   Textarea,
   Button,
 } from "@mantine/core";

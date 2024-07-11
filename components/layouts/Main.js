@@ -24,6 +24,8 @@ import {
   IoPhonePortraitOutline,
   IoSettingsOutline,
 } from "react-icons/io5";
+import { PiAirplaneTakeoffBold } from "react-icons/pi";
+import { IoHardwareChipOutline } from "react-icons/io5";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -39,6 +41,8 @@ export default function Main({ children, style = "" }) {
   const navigation = [
     { name: "Dashboard", href: `/user/dashboard`, icon: RiDashboard2Line },
     { name: "Onboard", href: `/user/onboarding`, icon: MagnifyingGlassIcon },
+    { name: "Offboard", href: `/user/offboarding`, icon: PiAirplaneTakeoffBold },
+    { name: "It bestilling", href: `/user/itbestillinger`, icon: IoHardwareChipOutline },
     { name: "Medarbejdere", href: `/user/medarbejdere`, icon: RiArchive2Line },
     // {
     //   name: "Udstyrsliste",

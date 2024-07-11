@@ -35,7 +35,7 @@ export default function OnboardIndex() {
       try {
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk",
+          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk",
           subject: "Medarbejder skal slettes",
           text: `
             En medarbejder skal slettes:

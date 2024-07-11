@@ -42,7 +42,7 @@ export default function ItIndex() {
       try {
         // Prepare email data with all form fields including selected hardware
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk",
+          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk",
           subject: "Bestilling af it udstyr",
           text: `
             It bestilling:

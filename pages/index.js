@@ -34,12 +34,12 @@ export default function Index() {
         <div className="pt-10 pr-20 pl-20 pb-20 shadow-xl mt-10 rounded-lg bg-white">
           <div className="flex justify-between mb-5">
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Vælg boarding
+              Vælg hvad der skal ske
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 mx-auto gap-4">
             <Link href="/onboardindex">
-              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-black hover:bg-[#EFF5F9] hover:cursor-pointer">
+              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-white hover:bg-[#000000] hover:cursor-pointer">
                 <h2 className="text-xl font-bold mx-auto text-center">
                   Gå til onboarding
                 </h2>
@@ -49,12 +49,22 @@ export default function Index() {
               </div>
             </Link>
             <Link href="/offboardindex">
-              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-black hover:bg-[#EFF5F9] hover:cursor-pointer">
+              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-white hover:bg-[#000000] hover:cursor-pointer">
                 <h2 className="text-xl font-bold mx-auto text-center">
                   Gå til offboarding
                 </h2>
                 <p className="mx-auto text-center mt-4">
                   Vælg denne, hvis en medarbejder stopper
+                </p>
+              </div>
+            </Link>
+            <Link href="/itpage">
+              <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-white hover:bg-[#000000] hover:cursor-pointer">
+                <h2 className="text-xl font-bold mx-auto text-center">
+                  Gå til it bestillinger
+                </h2>
+                <p className="mx-auto text-center mt-4">
+                  Vælg denne, hvis der skal bestilles it udstyr
                 </p>
               </div>
             </Link>

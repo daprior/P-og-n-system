@@ -19,7 +19,7 @@ export default function ItIndex() {
             className="bg-black"><IoChevronBack/> Tilbage</Button>
           </div>
             <h2 className="mt-4 mb-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              It udstyr
+              IT-udstyr
             </h2>
 
           <ItBoard  />

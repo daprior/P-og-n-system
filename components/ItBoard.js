@@ -43,7 +43,7 @@ export default function ItIndex() {
         // Prepare email data with all form fields including selected hardware
         const emailData = {
           to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk",
-          subject: "Bestilling af it udstyr",
+          subject: "Bestilling af IT-udstyr",
           text: `
             It bestilling:
 
@@ -114,7 +114,7 @@ export default function ItIndex() {
   return (
     <div>
       <div className="font-bold mb-4">
-        <h3>Bestilling af it udstyr</h3>
+        <h3>Bestilling af IT-udstyr</h3>
       </div>
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
         <div className="mt-4 mb-4">

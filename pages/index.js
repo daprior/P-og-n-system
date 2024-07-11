@@ -61,10 +61,10 @@ export default function Index() {
             <Link href="/itpage">
               <div className="mx-auto border rounded-xl shadow-xl p-16 mt-10 bg-[#0F4B70] text-white hover:text-white hover:bg-[#000000] hover:cursor-pointer">
                 <h2 className="text-xl font-bold mx-auto text-center">
-                  Gå til it bestillinger
+                  Gå til IT-bestillinger
                 </h2>
                 <p className="mx-auto text-center mt-4">
-                  Vælg denne, hvis der skal bestilles it udstyr
+                  Vælg denne, hvis der skal bestilles IT-udstyr
                 </p>
               </div>
             </Link>

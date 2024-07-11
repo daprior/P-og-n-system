@@ -58,7 +58,7 @@ export default function ItIndex() {
 
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
-          hardware: form.values.hardware.join(", "), // Convert array to comma-separated string
+          hardware: form?.values?.hardware.join(", "), // Convert array to comma-separated string
         };
 
         // Call sendEmail function to notify about employee deletion
@@ -196,7 +196,7 @@ export default function ItIndex() {
             color="green"
             onClick={() => handleConfirmation(true)}
           >
-            Ja, send medarbejder til sletning
+            Ja, send bestilling
           </Button>
           <Button
             className="bg-black"

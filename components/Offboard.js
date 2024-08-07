@@ -35,8 +35,8 @@ export default function OnboardIndex() {
       try {
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk",
-          subject: "Medarbejder skal slettes",
+          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk, lone.hansen@autohus.dk",
+          subject: "Medarbejder skal slettes / stopper",
           text: `
             En medarbejder skal slettes:
   
@@ -46,7 +46,7 @@ export default function OnboardIndex() {
 
             Husk:
             
-            Medarbejder skal have autosvar på sin mail
+            Medarbejder skal have svar på sin mail
             Aflevere nøgler
             Aflevere telefon
             Aflevere alt pc-udstyr - Retur til IT i Randers

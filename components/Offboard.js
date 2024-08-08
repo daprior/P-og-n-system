@@ -50,7 +50,7 @@ export default function OnboardIndex() {
             Aflevere nøgler
             Aflevere telefon
             Aflevere alt pc-udstyr - Retur til IT i Randers
-            Besked sendes til: Løn, IT og marketing
+
   
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
@@ -113,7 +113,6 @@ export default function OnboardIndex() {
             <li>Aflevere nøgler</li>
             <li>Aflevere telefon</li>
             <li>Aflevere alt pc-udstyr - Retur til IT i Randers</li>
-            <li>Besked sendes til: Løn, IT og marketing</li>
           </ul>
         </div>
         <Button className="bg-black mt-10" type="submit">

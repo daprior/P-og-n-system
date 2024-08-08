@@ -62,7 +62,7 @@ export default function OnboardIndex() {
 
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk, lone.hansen@autohus.dk",
+          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk, lone.hansen@autohus.dk, Jens.Hymoller@autohus.dk",
           subject: "Ny medarbejder oprettet",
           text: `
             En ny medarbejder er tilføjet til Onboarding:

@@ -28,7 +28,7 @@ export default function OnboardIndex() {
       department: [],
       accesses: [],
       other: "",
-      status: [],
+      status: ["under udvikling"],
       note: "",
     },
   });
@@ -69,18 +69,46 @@ export default function OnboardIndex() {
 
             Oprettet af: ${form.values.createdby}
             Medarbejderens navn: ${form.values.name}
-            Email: ${Array.isArray(form.values.email) ? form.values.email.join(", ") : form.values.email}
-            Telefon: ${Array.isArray(form.values.phone) ? form.values.phone.join(", ") : form.values.phone}
-            Beskatning af fri tlf: ${Array.isArray(form.values.phonemodel) ? form.values.phonemodel.join(", ") : form.values.phonemodel}
+            Email: ${
+              Array.isArray(form.values.email)
+                ? form.values.email.join(", ")
+                : form.values.email
+            }
+            Telefon: ${
+              Array.isArray(form.values.phone)
+                ? form.values.phone.join(", ")
+                : form.values.phone
+            }
+            Beskatning af fri tlf: ${
+              Array.isArray(form.values.phonemodel)
+                ? form.values.phonemodel.join(", ")
+                : form.values.phonemodel
+            }
             Note til telefon: ${form.values.phonenote}
             Job beskrivelse: ${form.values.jobtitle}
-            Afdeling: ${Array.isArray(form.values.department) ? form.values.department.join(", ") : form.values.department}
-            Visitkort: ${Array.isArray(form.values.card) ? form.values.card.join(", ") : form.values.card}
+            Afdeling: ${
+              Array.isArray(form.values.department)
+                ? form.values.department.join(", ")
+                : form.values.department
+            }
+            Visitkort: ${
+              Array.isArray(form.values.card)
+                ? form.values.card.join(", ")
+                : form.values.card
+            }
             Andet hardware note: ${form.values.other}
-            Adgange: ${Array.isArray(form.values.accesses) ? form.values.accesses.join(", ") : form.values.accesses}
+            Adgange: ${
+              Array.isArray(form.values.accesses)
+                ? form.values.accesses.join(", ")
+                : form.values.accesses
+            }
             Note: ${form.values.note}
             Ansættelsesdato: ${form.values.employmentdate}
-            Status: ${Array.isArray(form.values.status) ? form.values.status.join(", ") : form.values.status}
+            Status: ${
+              Array.isArray(form.values.status)
+                ? form.values.status.join(", ")
+                : form.values.status
+            }
 
 
             Denne mail er automatisk genereret fra onboarding.autohus.dk
@@ -170,14 +198,6 @@ export default function OnboardIndex() {
             size="xs"
           />
 
-          <Select
-            label="Status på onboarding"
-            placeholder="Under udvikling"
-            {...form.getInputProps("status")}
-            data={["under udvikling", "færdig"]}
-            size="xs"
-          />
-
           <MultiSelect
             label="Afdeling"
             size="xs"
@@ -222,6 +242,14 @@ export default function OnboardIndex() {
             label="Andet hardware ønskes"
             placeholder="Eks. mus, tastatur, skærm etc."
             {...form.getInputProps("other")}
+            size="xs"
+          />
+          <Select
+            label="Status på onboarding (Skal være under udvikling)"
+            placeholder="Under udvikling"
+            disabled
+            {...form.getInputProps("status")}
+            data={["under udvikling", "færdig"]}
             size="xs"
           />
         </div>

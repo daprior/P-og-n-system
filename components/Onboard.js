@@ -80,9 +80,9 @@ export default function OnboardIndex() {
                 : form.values.phone
             }
             Beskatning af fri tlf: ${
-              Array.isArray(form.values.phonemodel)
-                ? form.values.phonemodel.join(", ")
-                : form.values.phonemodel
+              Array.isArray(form.values.paidphone)
+                ? form.values.paidphone.join(", ")
+                : form.values.paidphone
             }
             Note til telefon: ${form.values.phonenote}
             Job beskrivelse: ${form.values.jobtitle}

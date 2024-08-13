@@ -1,9 +1,8 @@
 import { Button, Group, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
-
 
 export default function OnboardIndex() {
   const form = useForm({
@@ -15,6 +14,27 @@ export default function OnboardIndex() {
   });
 
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [offboardMails, setOffboardMails] = useState([]);
+
+  useEffect(() => {
+    const fetchOffboardMails = async () => {
+      try {
+        const response = await axios.get("/api/settings");
+        const settings = response.data.data || {};
+        const offboardmails = JSON.parse(settings.offboardmails || "[]");
+        setOffboardMails(offboardmails);
+      } catch (error) {
+        console.error("Error fetching offboard mails:", error);
+        notifications.show({
+          title: "Error",
+          color: "red",
+          message: "Failed to fetch offboard mails.",
+        });
+      }
+    };
+
+    fetchOffboardMails();
+  }, []);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
@@ -35,7 +55,7 @@ export default function OnboardIndex() {
       try {
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk, lone.hansen@autohus.dk, Jens.Hymoller@autohus.dk",
+          to: offboardMails.join(", "),  // Use fetched offboard emails
           subject: "Medarbejder skal slettes / stopper",
           text: `
             En medarbejder skal slettes:
@@ -56,7 +76,7 @@ export default function OnboardIndex() {
           `,
         };
   
-        // Call sendEmail function to notify about employee creation
+        // Call sendEmail function to notify about employee offboarding
         await sendEmail(emailData);
         
         // Show success notification
@@ -78,6 +98,8 @@ export default function OnboardIndex() {
     }
     setShowConfirmation(false);
   };
+
+  console.log(offboardMails)
 
   return (
     <div>
@@ -131,7 +153,7 @@ export default function OnboardIndex() {
             color="green"
             onClick={() => handleConfirmation(true)}
           >
-            Ja, send medarbejder ti sletning
+            Ja, send medarbejder til sletning
           </Button>
           <Button
             className="bg-black"

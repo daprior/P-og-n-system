@@ -6,8 +6,8 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { useForm } from "@mantine/form"; // Make sure this path is correct based on your installation
-import React, { useState } from "react";
+import { useForm } from "@mantine/form";
+import React, { useState, useEffect } from "react";
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
 
@@ -22,6 +22,27 @@ export default function ItIndex() {
   });
 
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [itMails, setItMails] = useState([]);
+
+  useEffect(() => {
+    const fetchItMails = async () => {
+      try {
+        const response = await axios.get("/api/settings");
+        const settings = response.data.data || {};
+        const itmails = JSON.parse(settings.itmails || "[]");
+        setItMails(itmails);
+      } catch (error) {
+        console.error("Error fetching IT mails:", error);
+        notifications.show({
+          title: "Error",
+          color: "red",
+          message: "Failed to fetch IT mails.",
+        });
+      }
+    };
+
+    fetchItMails();
+  }, []);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
@@ -42,26 +63,24 @@ export default function ItIndex() {
       try {
         // Prepare email data with all form fields including selected hardware
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk, Jens.Hymoller@autohus.dk",
+          to: itMails.join(", "),  // Use fetched IT emails
           subject: "Bestilling af IT-udstyr",
           text: `
-            It bestilling:
+            IT bestilling:
 
-            Medarbejderens navn: ${form?.values?.medarbejderensnavn}
+            Medarbejderens navn: ${form.values.medarbejderensnavn}
 
-            Skema udfyldt af: ${form?.values?.udfyldtaf}
+            Skema udfyldt af: ${form.values.udfyldtaf}
 
-            Udstyr: ${form?.values?.hardware}
+            Udstyr: ${form.values.hardware.join(", ")}
 
-            Andet: ${form?.values?.andet}
+            Andet: ${form.values.andet}
             
-
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
-          hardware: form?.values?.hardware.join(", "), // Convert array to comma-separated string
         };
 
-        // Call sendEmail function to notify about employee deletion
+        // Call sendEmail function to notify about IT equipment order
         await sendEmail(emailData);
 
         // Show success notification
@@ -107,9 +126,10 @@ export default function ItIndex() {
     "Telefon lader",
   ];
 
-
   const columns = 4;
   const itemsPerColumn = Math.ceil(hardwareItems.length / columns);
+
+  console.log(itMails)
 
   return (
     <div>

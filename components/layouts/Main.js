@@ -53,12 +53,12 @@ export default function Main({ children, style = "" }) {
   ];
 
   const teams = [
-    // {
-    //   id: 1,
-    //   name: "#",
-    //   href: "#",
-    //   initial: "W",
-    // },
+    {
+      id: 1,
+      name: "Indstillinger",
+      href: "/user/indstillinger",
+      initial: "I",
+    },
   ];
   const userNavigation = [{ name: "Forside", href: "/" }];
 
@@ -162,9 +162,9 @@ export default function Main({ children, style = "" }) {
                           </ul>
                         </li>
                         <li>
-                          {/* <div className="text-xs font-semibold leading-6 text-black ">
+                          <div className="text-xs font-semibold leading-6 text-black ">
                             Konfigurationer
-                          </div> */}
+                          </div>
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>

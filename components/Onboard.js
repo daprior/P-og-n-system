@@ -9,7 +9,7 @@ import {
   Select,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
 
@@ -34,6 +34,27 @@ export default function OnboardIndex() {
   });
 
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [onboardMails, setOnboardMails] = useState([]);
+
+  useEffect(() => {
+    const fetchOnboardMails = async () => {
+      try {
+        const response = await axios.get("/api/settings");
+        const settings = response.data.data || {};
+        const onboardMails = JSON.parse(settings.onboardmails || "[]");
+        setOnboardMails(onboardMails);
+      } catch (error) {
+        console.error("Error fetching onboard mails:", error);
+        notifications.show({
+          title: "Error",
+          color: "red",
+          message: "Failed to fetch onboard mails.",
+        });
+      }
+    };
+
+    fetchOnboardMails();
+  }, []);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
@@ -62,7 +83,7 @@ export default function OnboardIndex() {
 
         // Prepare email data with all form fields
         const emailData = {
-          to: "daniel.prior@autohus.dk, laura.drustrup@autohus.dk, Jan.Langkjaer@autohus.dk, lone.hansen@autohus.dk, Jens.Hymoller@autohus.dk",
+          to: onboardMails.join(", "), // Use onboardMails from state
           subject: "Ny medarbejder oprettet",
           text: `
             En ny medarbejder er tilføjet til Onboarding:
@@ -129,6 +150,9 @@ export default function OnboardIndex() {
     }
     setShowConfirmation(false);
   };
+
+
+  console.log(onboardMails)
 
   return (
     <div>

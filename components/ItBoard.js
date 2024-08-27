@@ -23,6 +23,7 @@ export default function ItIndex() {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [itMails, setItMails] = useState([]);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
   useEffect(() => {
     const fetchItMails = async () => {
@@ -44,6 +45,15 @@ export default function ItIndex() {
     fetchItMails();
   }, []);
 
+  // Enable submit button only when both required fields are filled
+  useEffect(() => {
+    if (form.values.medarbejderensnavn && form.values.udfyldtaf) {
+      setIsSubmitEnabled(true);
+    } else {
+      setIsSubmitEnabled(false);
+    }
+  }, [form.values.medarbejderensnavn, form.values.udfyldtaf]);
+
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
   };
@@ -61,10 +71,14 @@ export default function ItIndex() {
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
       try {
+           // Get the current date and format it as DD/MM-YYYY
+      const currentDate = new Date();
+      const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}-${currentDate.getFullYear()}`;
+
         // Prepare email data with all form fields including selected hardware
         const emailData = {
           to: itMails.join(", "),  // Use fetched IT emails
-          subject: "Bestilling af IT-udstyr",
+          subject: `Bestilling IT: ${form.values.medarbejderensnavn} - ${formattedDate}`,
           text: `
             IT bestilling:
 
@@ -139,7 +153,7 @@ export default function ItIndex() {
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
         <div className="mt-4 mb-4">
           <TextInput
-            label="Skema udfyldt af"
+            label="Skema udfyldt af*"
             placeholder="f.eks. Daniel Prior."
             className="mb-4"
             {...form.getInputProps("udfyldtaf")}
@@ -147,7 +161,7 @@ export default function ItIndex() {
           />
 
           <TextInput
-            label="Medarbejderens navn"
+            label="Medarbejderens navn*"
             placeholder="f.eks. Jens Jensen."
             {...form.getInputProps("medarbejderensnavn")}
             className="mb-8"
@@ -190,9 +204,14 @@ export default function ItIndex() {
             size="xs"
           />
         </div>
-        <Button className="bg-black mt-10" type="submit">
+        <Button className="bg-black mt-10" type="submit" disabled={!isSubmitEnabled}>
           Send
         </Button>
+        {!isSubmitEnabled && (
+    <div className="text-red-500 text-sm mt-2">
+      Felter med * mangler
+    </div>
+  )}
       </form>
       <Modal
         opened={showConfirmation}

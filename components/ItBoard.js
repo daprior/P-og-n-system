@@ -18,6 +18,7 @@ export default function ItIndex() {
       udfyldtaf: "",
       hardware: [], // Array to store selected hardware items
       andet: "",
+      modtageradresse: "",
     },
   });
 
@@ -47,12 +48,12 @@ export default function ItIndex() {
 
   // Enable submit button only when both required fields are filled
   useEffect(() => {
-    if (form.values.medarbejderensnavn && form.values.udfyldtaf) {
+    if (form.values.medarbejderensnavn && form.values.udfyldtaf && form.values.modtageradresse) {
       setIsSubmitEnabled(true);
     } else {
       setIsSubmitEnabled(false);
     }
-  }, [form.values.medarbejderensnavn, form.values.udfyldtaf]);
+  }, [form.values.medarbejderensnavn, form.values.udfyldtaf, form.values.modtageradresse]);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
@@ -71,13 +72,19 @@ export default function ItIndex() {
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
       try {
-           // Get the current date and format it as DD/MM-YYYY
-      const currentDate = new Date();
-      const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}/${String(currentDate.getMonth() + 1).padStart(2, '0')}-${currentDate.getFullYear()}`;
+        // Get the current date and format it as DD/MM-YYYY
+        const currentDate = new Date();
+        const formattedDate = `${String(currentDate.getDate()).padStart(
+          2,
+          "0"
+        )}/${String(currentDate.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}-${currentDate.getFullYear()}`;
 
         // Prepare email data with all form fields including selected hardware
         const emailData = {
-          to: itMails.join(", "),  // Use fetched IT emails
+          to: itMails.join(", "), // Use fetched IT emails
           subject: `Bestilling IT: ${form.values.medarbejderensnavn} - ${formattedDate}`,
           text: `
             IT bestilling:
@@ -85,6 +92,8 @@ export default function ItIndex() {
             Medarbejderens navn: ${form.values.medarbejderensnavn}
 
             Skema udfyldt af: ${form.values.udfyldtaf}
+
+            Modtager adresse: ${form.values.modtageradresse}
 
             Udstyr: ${form.values.hardware.join(", ")}
 
@@ -143,8 +152,6 @@ export default function ItIndex() {
   const columns = 4;
   const itemsPerColumn = Math.ceil(hardwareItems.length / columns);
 
-  console.log(itMails)
-
   return (
     <div>
       <div className="font-bold mb-4">
@@ -164,6 +171,13 @@ export default function ItIndex() {
             label="Medarbejderens navn*"
             placeholder="f.eks. Jens Jensen."
             {...form.getInputProps("medarbejderensnavn")}
+            className="mb-4"
+            size="xs"
+          />
+          <TextInput
+            label="Modtager adresse / Afdeling*"
+            placeholder="f.eks. Aalborg, Indskrivning Aarhus, eller erhverv Aalborg."
+            {...form.getInputProps("modtageradresse")}
             className="mb-8"
             size="xs"
           />
@@ -204,14 +218,16 @@ export default function ItIndex() {
             size="xs"
           />
         </div>
-        <Button className="bg-black mt-10" type="submit" disabled={!isSubmitEnabled}>
+        <Button
+          className="bg-black mt-10"
+          type="submit"
+          disabled={!isSubmitEnabled}
+        >
           Send
         </Button>
         {!isSubmitEnabled && (
-    <div className="text-red-500 text-sm mt-2">
-      Felter med * mangler
-    </div>
-  )}
+          <div className="text-red-500 text-sm mt-2">Felter med * mangler</div>
+        )}
       </form>
       <Modal
         opened={showConfirmation}

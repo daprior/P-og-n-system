@@ -9,6 +9,7 @@ export default function OnboardIndex() {
     initialValues: {
       skemaudfyldtaf: "",
       slutdato: "",
+      afdeling: "",
       medarbejdernavn: "",
     },
   });
@@ -55,7 +56,7 @@ export default function OnboardIndex() {
       try {
         // Prepare email data with all form fields
         const emailData = {
-          to: offboardMails.join(", "),  // Use fetched offboard emails
+          to: offboardMails.join(", "), // Use fetched offboard emails
           subject: "Medarbejder skal slettes / stopper",
           text: `
             En medarbejder skal slettes:
@@ -63,6 +64,7 @@ export default function OnboardIndex() {
             Skema udfyldt af: ${form.values.skemaudfyldtaf}
             Medarbejder stopper dato: ${form.values.slutdato}
             Medarbejder navn: ${form.values.medarbejdernavn}
+            Afdeling: ${form.values.afdeling}
 
             Husk:
             
@@ -75,17 +77,17 @@ export default function OnboardIndex() {
             Denne mail er automatisk genereret fra onboarding.autohus.dk
           `,
         };
-  
+
         // Call sendEmail function to notify about employee offboarding
         await sendEmail(emailData);
-        
+
         // Show success notification
         notifications.show({
           title: "Success",
           color: "green",
           message: "Medarbejder sendt til sletning.",
         });
-  
+
         console.log("Email sent successfully");
       } catch (error) {
         console.error("Error sending mail:", error);
@@ -99,7 +101,7 @@ export default function OnboardIndex() {
     setShowConfirmation(false);
   };
 
-  console.log(offboardMails)
+  console.log(offboardMails);
 
   return (
     <div>
@@ -125,6 +127,12 @@ export default function OnboardIndex() {
             label="Medarbejderens navn"
             placeholder="f.eks. Jens Jensen."
             {...form.getInputProps("medarbejdernavn")}
+            size="xs"
+          />
+          <TextInput
+            label="Afdeling"
+            placeholder="f.eks. Aalborg."
+            {...form.getInputProps("afdeling")}
             size="xs"
           />
         </div>

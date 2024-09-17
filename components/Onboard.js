@@ -35,6 +35,7 @@ export default function OnboardIndex() {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [onboardMails, setOnboardMails] = useState([]);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
   useEffect(() => {
     const fetchOnboardMails = async () => {
@@ -55,6 +56,26 @@ export default function OnboardIndex() {
 
     fetchOnboardMails();
   }, []);
+
+  useEffect(() => {
+    if (
+      form.values.createdby &&
+      form.values.name &&
+      form.values.jobtitle &&
+      form.values.employmentdate &&
+      form.values.department.length > 0
+    ) {
+      setIsSubmitEnabled(true);
+    } else {
+      setIsSubmitEnabled(false);
+    }
+  }, [
+    form.values.createdby,
+    form.values.name,
+    form.values.jobtitle,
+    form.values.employmentdate,
+    form.values.department,
+  ]);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
@@ -160,8 +181,7 @@ export default function OnboardIndex() {
     setShowConfirmation(false);
   };
 
-
-  console.log(onboardMails)
+  console.log(onboardMails);
 
   return (
     <div>
@@ -170,7 +190,7 @@ export default function OnboardIndex() {
       </div>
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
         <TextInput
-          label="Oprettet af"
+          label="Oprettet af*"
           className="mb-4"
           placeholder="Navn"
           {...form.getInputProps("createdby")}
@@ -178,7 +198,7 @@ export default function OnboardIndex() {
         />
         <div className="grid gap-4 md:grid-cols-2">
           <TextInput
-            label="Navn"
+            label="Navn*"
             placeholder="Medarbejder navn"
             {...form.getInputProps("name")}
             size="xs"
@@ -198,13 +218,13 @@ export default function OnboardIndex() {
             size="xs"
           />
           <TextInput
-            label="Job titel"
+            label="Job titel*"
             placeholder="titel"
             {...form.getInputProps("jobtitle")}
             size="xs"
           />
           <TextInput
-            label="Ansættelsesdato"
+            label="Ansættelsesdato*"
             placeholder="02-03-2024"
             {...form.getInputProps("employmentdate")}
             size="xs"
@@ -232,7 +252,7 @@ export default function OnboardIndex() {
           />
 
           <MultiSelect
-            label="Afdeling"
+            label="Afdeling*"
             size="xs"
             placeholder="Aalborg, Risskov..."
             data={[
@@ -293,9 +313,16 @@ export default function OnboardIndex() {
           {...form.getInputProps("note")}
           size="xs"
         />
-        <Button className="bg-black mt-10" type="submit">
+        <Button
+          className="bg-black mt-10"
+          type="submit"
+          disabled={!isSubmitEnabled}
+        >
           Opret medarbejder
         </Button>
+        {!isSubmitEnabled && (
+          <div className="text-red-500 text-sm mt-2">Felter med * mangler</div>
+        )}
       </form>
 
       <Modal

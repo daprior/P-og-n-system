@@ -16,6 +16,7 @@ export default function OnboardIndex() {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [offboardMails, setOffboardMails] = useState([]);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
   useEffect(() => {
     const fetchOffboardMails = async () => {
@@ -36,6 +37,22 @@ export default function OnboardIndex() {
 
     fetchOffboardMails();
   }, []);
+
+  useEffect(() => {
+    if (
+      form.values.skemaudfyldtaf &&
+      form.values.medarbejdernavn &&
+      form.values.afdeling
+    ) {
+      setIsSubmitEnabled(true);
+    } else {
+      setIsSubmitEnabled(false);
+    }
+  }, [
+    form.values.skemaudfyldtaf,
+    form.values.medarbejdernavn,
+    form.values.afdeling,
+  ]);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(true);
@@ -118,7 +135,7 @@ export default function OnboardIndex() {
       </div>
       <form onSubmit={form.onSubmit(() => handleShowConfirmation())}>
         <TextInput
-          label="Skema udfyldt af"
+          label="Skema udfyldt af*"
           placeholder="f.eks. Daniel Prior."
           className="mb-4"
           {...form.getInputProps("skemaudfyldtaf")}
@@ -132,13 +149,13 @@ export default function OnboardIndex() {
             size="xs"
           />
           <TextInput
-            label="Medarbejderens navn"
+            label="Medarbejderens navn*"
             placeholder="f.eks. Jens Jensen."
             {...form.getInputProps("medarbejdernavn")}
             size="xs"
           />
           <TextInput
-            label="Afdeling"
+            label="Afdeling*"
             placeholder="f.eks. Aalborg."
             {...form.getInputProps("afdeling")}
             size="xs"
@@ -153,9 +170,16 @@ export default function OnboardIndex() {
             <li>Aflevere alt pc-udstyr - Retur til IT i Randers</li>
           </ul>
         </div>
-        <Button className="bg-black mt-10" type="submit">
+        <Button
+          className="bg-black mt-10"
+          type="submit"
+          disabled={!isSubmitEnabled}
+        >
           Send
         </Button>
+        {!isSubmitEnabled && (
+          <div className="text-red-500 text-sm mt-2">Felter med * mangler</div>
+        )}
       </form>
       <Modal
         opened={showConfirmation}

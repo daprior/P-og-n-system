@@ -16,7 +16,7 @@ export default function ItIndex() {
     initialValues: {
       medarbejderensnavn: "",
       udfyldtaf: "",
-      hardware: [], // Array to store selected hardware items
+      hardware: [], 
       andet: "",
       modtageradresse: "",
     },
@@ -72,6 +72,15 @@ export default function ItIndex() {
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
       try {
+        const response = await axios.post("/api/createorder", form.values);
+        console.log("Order created:", response.data);
+        notifications.show({
+          title: "Created",
+          color: "green",
+          message: "Order has been created successfully.",
+        });
+
+
         // Get the current date and format it as DD/MM-YYYY
         const currentDate = new Date();
         const formattedDate = `${String(currentDate.getDate()).padStart(

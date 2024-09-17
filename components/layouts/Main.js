@@ -22,6 +22,7 @@ import {
   IoDocumentAttachSharp,
   IoDocumentOutline,
   IoPhonePortraitOutline,
+  IoReorderTwo,
   IoSettingsOutline,
 } from "react-icons/io5";
 import { PiAirplaneTakeoffBold } from "react-icons/pi";
@@ -44,6 +45,7 @@ export default function Main({ children, style = "" }) {
     { name: "Offboard", href: `/user/offboarding`, icon: PiAirplaneTakeoffBold },
     { name: "It bestilling", href: `/user/itbestillinger`, icon: IoHardwareChipOutline },
     { name: "Medarbejdere", href: `/user/medarbejdere`, icon: RiArchive2Line },
+    { name: "Bestillinger", href: `/user/bestillinger`, icon: IoReorderTwo },
     // {
     //   name: "Udstyrsliste",
     //   href: `/user/equipment`,

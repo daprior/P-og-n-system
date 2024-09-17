@@ -54,12 +54,20 @@ export default function OnboardIndex() {
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
       try {
+        const currentDate = new Date();
+        const formattedDate = `${String(currentDate.getDate()).padStart(
+          2,
+          "0"
+        )}/${String(currentDate.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}-${currentDate.getFullYear()}`;
         // Prepare email data with all form fields
         const emailData = {
           to: offboardMails.join(", "), // Use fetched offboard emails
-          subject: "Medarbejder skal slettes / stopper",
+          subject: `Medarbejder stopper: ${form.values.medarbejdernavn} - ${formattedDate}`,
           text: `
-            En medarbejder skal slettes:
+            En medarbejder stopper og skal slettes:
   
             Skema udfyldt af: ${form.values.skemaudfyldtaf}
             Medarbejder stopper dato: ${form.values.slutdato}

@@ -81,10 +81,19 @@ export default function OnboardIndex() {
           message: "Employee has been created successfully.",
         });
 
+        const currentDate = new Date();
+        const formattedDate = `${String(currentDate.getDate()).padStart(
+          2,
+          "0"
+        )}/${String(currentDate.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}-${currentDate.getFullYear()}`;
+
         // Prepare email data with all form fields
         const emailData = {
           to: onboardMails.join(", "), // Use onboardMails from state
-          subject: "Ny medarbejder oprettet",
+          subject: `Ny medarbejder: ${form.values.name} - ${formattedDate}`,
           text: `
             En ny medarbejder er tilføjet til Onboarding:
 
